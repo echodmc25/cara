@@ -1,14 +1,33 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Arizonia, Kaisei_Tokumin, Raleway, Ropa_Sans } from "next/font/google";
 import "./globals.css";
+import Header from "./components/header/Header";
+import StickyCategories from "./components/stickyCategories/StickyCategories";
+import { CategoryProvider } from "./context/CategoryContext";
+import HeaderWrapper from "./components/header/HeaderWrapper";
+import { CartProvider } from "./context/CartContext";
+import Cart from "./components/cart/Cart";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const kaisei = Kaisei_Tokumin({
+  variable: "--font-kaisei",
+  weight: ["400", "500", "700"],
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const arizonia = Arizonia({
+  variable: "--font-arizonia",
+  weight: ["400"],
+});
+
+const ropa = Ropa_Sans({
+  variable: "--font-ropa",
   subsets: ["latin"],
+  weight: ["400"],
+});
+
+const raleway = Raleway({
+  variable: "--font-raleway",
+  subsets: ["latin"],
+  weight: ["400"],
 });
 
 export const metadata = {
@@ -20,9 +39,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${ropa.variable} ${raleway.variable} ${arizonia.variable} ${kaisei.variable}`}
       >
-        {children}
+        <CartProvider>
+          <HeaderWrapper />
+          {children}
+          <Cart />
+        </CartProvider>
       </body>
     </html>
   );
