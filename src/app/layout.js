@@ -17,6 +17,7 @@ const kaisei = Kaisei_Tokumin({
 const arizonia = Arizonia({
   variable: "--font-arizonia",
   weight: ["400"],
+  subsets: ["latin"],
 });
 
 const ropa = Ropa_Sans({
