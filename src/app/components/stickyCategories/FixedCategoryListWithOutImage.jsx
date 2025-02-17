@@ -1,13 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 
 const FixedCategoryListWithOutImage = ({ categories }) => {
-  const pathname = usePathname(); // Get current path
-
-  const categoryRefs = useRef({});
   const draggableRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);

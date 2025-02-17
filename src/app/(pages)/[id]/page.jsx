@@ -7,7 +7,6 @@ import BackButton from "@/app/components/button/BackButton";
 import AddToCartButton from "@/app/components/button/AddToCartButton";
 import ProductPageSlider from "@/app/components/slides/ProductPageSlider";
 import FixedCategoryListWithOutImage from "@/app/components/stickyCategories/FixedCategoryListWithOutImage";
-import FixedCategoryList from "@/app/components/stickyCategories/FixedCategoryListWithImage";
 import FixedCategoryListWithImage from "@/app/components/stickyCategories/FixedCategoryListWithImage";
 
 const getSingleProduct = async (pro_id) => {
@@ -29,7 +28,7 @@ const getSingleProduct = async (pro_id) => {
 const getCategories = async () => {
   try {
     const res = await fetch(
-      "https://clients.echodigital.net/carabliss/get_subcat3.php",
+      "https://clients.echodigital.net/carabliss/get_subcat5.php",
       {
         cache: "no-store", // Ensures fresh data on every request
       }

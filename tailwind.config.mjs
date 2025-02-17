@@ -22,7 +22,7 @@ export default {
         kaisei: "var(--font-kaisei)",
         arizonia: "var(--font-arizonia)",
         ropa: "var(--font-ropa)",
-        Raleway: "var(--font-Raleway)",
+        Raleway: "var(--font-raleway)",
       },
     },
     screens: {

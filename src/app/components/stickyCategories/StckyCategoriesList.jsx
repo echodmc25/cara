@@ -92,7 +92,13 @@ const StckyCategoriesList = ({ categories }) => {
           ref={draggableRef}
         >
           {categories.map((category) => {
-            const isActive = activeHash === String(category.subcat_id);
+            const isActive =
+              activeHash ===
+              category.sub_catname
+                .trim()
+                .replace(/[^\w\s-]/g, "") // Remove special characters
+                .replace(/\s+/g, "-") // Replace spaces with hyphens
+                .toLowerCase();
 
             return (
               <button

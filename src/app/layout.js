@@ -6,6 +6,7 @@ import { CategoryProvider } from "./context/CategoryContext";
 import HeaderWrapper from "./components/header/HeaderWrapper";
 import { CartProvider } from "./context/CartContext";
 import Cart from "./components/cart/Cart";
+import Footer from "./components/footer/Footer";
 
 const kaisei = Kaisei_Tokumin({
   variable: "--font-kaisei",
@@ -43,8 +44,9 @@ export default function RootLayout({ children }) {
       >
         <CartProvider>
           <HeaderWrapper />
-          {children}
-          <Cart />
+          <main className="relative">{children}</main>
+          {/* <Cart /> */}
+          <Footer />
         </CartProvider>
       </body>
     </html>

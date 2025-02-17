@@ -139,10 +139,12 @@ const ProductDataTab = ({ tabsData }) => {
               <button
                 onClick={() => addToListed(item.topping_name)}
                 key={index}
-                className="flex w-full justify-between py-3 border-b border-gray-200"
+                className="flex w-full justify-between items-center py-3 border-b border-gray-200"
               >
-                <span className="font-ropa text-xl">{item.topping_name}</span>
-                <div className="flex gap-2 justify-center items-center">
+                <span className="font-ropa text-xl text-left">
+                  {item.topping_name}
+                </span>
+                <div className="flex gap-2 justify-center items-center min-w-20">
                   <span className="font-ropa text-xl">
                     Rs. {item.topping_price}
                   </span>

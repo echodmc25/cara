@@ -6,7 +6,7 @@ import FixedCategoryList from "@/app/components/stickyCategories/FixedCategoryLi
 const getSubCategoriesWithProducts = async (cat_id) => {
   try {
     const res = await fetch(
-      `https://clients.echodigital.net/carabliss/get_productsnew2.php`,
+      `https://clients.echodigital.net/carabliss/get_productsnew3.php`,
       { cache: "no-store" } // Always fetch fresh data
     );
 
@@ -22,7 +22,7 @@ const getSubCategoriesWithProducts = async (cat_id) => {
 const getCategories = async () => {
   try {
     const res = await fetch(
-      "https://clients.echodigital.net/carabliss/get_subcat3.php",
+      "https://clients.echodigital.net/carabliss/get_subcat5.php",
       {
         cache: "no-store", // Ensures fresh data on every request
       }
@@ -78,7 +78,7 @@ export default async function Menu({ params }) {
                       </h2>
 
                       {/* Products Grid */}
-                      <div className="grid grid-cols-4 tablet:grid-cols-3 mobile:grid-cols-1 gap-y-10 gap-x-5 mt-5 mobile:mt-5">
+                      <div className="grid grid-cols-4 tablet:grid-cols-3 mobile:grid-cols-2 gap-y-10 gap-x-5 mt-5 mobile:mt-5">
                         {subCategory?.products?.length > 0 ? (
                           subCategory.products.map((product) => (
                             <ProductCard
