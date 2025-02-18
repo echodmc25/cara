@@ -68,7 +68,7 @@ export default async function Home() {
 
   return (
     <>
-      <div className="relative -mt-[115px]">
+      <div className="relativex">
         <BannerSlider slides={slides} />
       </div>
 

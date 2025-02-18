@@ -21,8 +21,10 @@ const Header = () => {
     <>
       <div
         className={`${
-          pathname === "/" ? "tablet:border-b border-white/20" : "bg-mahroon"
-        }  z-10 relative`}
+          pathname === "/"
+            ? "tablet:border-b border-white/20 absolute z-10 w-full"
+            : "bg-mahroon"
+        }`}
       >
         <div className="px-12 laptop:px-8 py-9 mobile:py-5 flex justify-between items-center mobile:px-5 max-[600px]:py-5">
           <div className="w-44 mobile:w-32">
@@ -57,9 +59,9 @@ const Header = () => {
                 About Us
               </Link>
               <Link
-                href="#"
+                href="/franchise"
                 className={`text-ropa text-base uppercase ${
-                  pathname === "/b" ? "text-[--accent]" : "text-white"
+                  pathname === "/franchise" ? "text-[--accent]" : "text-white"
                 }`}
               >
                 Franchise
@@ -155,16 +157,16 @@ const Header = () => {
               onClick={toggleMenu}
               href="/menu"
               className={`text-ropa text-3xl  uppercase ${
-                pathname === "#" ? "text-[--accent]" : "text-white"
+                pathname === "/menu" ? "text-[--accent]" : "text-white"
               }`}
             >
               Menu
             </Link>
             <Link
               onClick={toggleMenu}
-              href="#"
+              href="/franchise"
               className={`text-ropa text-3xl  uppercase ${
-                pathname === "#" ? "text-[--accent]" : "text-white"
+                pathname === "/franchise" ? "text-[--accent]" : "text-white"
               }`}
             >
               Franchise
