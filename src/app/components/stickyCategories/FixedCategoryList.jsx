@@ -241,7 +241,7 @@ const FixedCategoryList = ({ categories }) => {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 tablet:px-8 w-full pt-8 pb-5 bg-black z-20 overflow-hidden hidden tablet:block mobile:hidden">
+    <div className="fixed bottom-0 left-0 tablet:px-8 w-full pt-8 pb-5 bg-black z-10 overflow-hidden hidden tablet:block mobile:hidden">
       <div className="relative container">
         <div
           className="inline-flex gap-5 overflow-x-auto draggable cursor-grab w-full"

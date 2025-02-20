@@ -1,18 +1,19 @@
-import { Arizonia, Kaisei_Tokumin, Raleway, Ropa_Sans } from "next/font/google";
+import { Arizonia, Raleway, Ropa_Sans } from "next/font/google";
 import "./globals.css";
-import Header from "./components/header/Header";
-import StickyCategories from "./components/stickyCategories/StickyCategories";
-import { CategoryProvider } from "./context/CategoryContext";
+// import Header from "./components/header/Header";
+// import StickyCategories from "./components/stickyCategories/StickyCategories";
+// import { CategoryProvider } from "./context/CategoryContext";
 import HeaderWrapper from "./components/header/HeaderWrapper";
 import { CartProvider } from "./context/CartContext";
-import Cart from "./components/cart/Cart";
+// import Cart from "./components/cart/Cart";
 import Footer from "./components/footer/Footer";
+import { PopupProvider } from "./context/PopContext";
 
-const kaisei = Kaisei_Tokumin({
-  variable: "--font-kaisei",
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-});
+// const kaisei = Kaisei_Tokumin({
+//   variable: "--font-kaisei",
+//   weight: ["400", "500", "700"],
+//   subsets: ["latin"],
+// });
 
 const arizonia = Arizonia({
   variable: "--font-arizonia",
@@ -40,12 +41,20 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Kaisei+Tokumin:wght@400;500;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body
-        className={`${ropa.variable} ${raleway.variable} ${arizonia.variable} ${kaisei.variable}`}
+        className={`${ropa.variable} ${raleway.variable} ${arizonia.variable} `}
       >
         <CartProvider>
           <HeaderWrapper />
-          <main className="relative">{children}</main>
+          <main className="relative">
+            <PopupProvider>{children}</PopupProvider>
+          </main>
           {/* <Cart /> */}
           <Footer />
         </CartProvider>

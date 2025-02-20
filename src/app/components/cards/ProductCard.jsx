@@ -7,8 +7,12 @@ import Pi1 from "@/app/assets/images/pp1.png";
 import { FaUserAlt } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa6";
+import { usePopup } from "@/app/context/PopContext";
 
 const ProductCard = ({ product, servings = false }) => {
+  const { setListOpen } = usePopup();
+
   const [listed, setListed] = useState(false);
 
   const addToListed = () => {
@@ -57,8 +61,8 @@ const ProductCard = ({ product, servings = false }) => {
   };
 
   return (
-    <div className="relative group">
-      {listed ? (
+    <div className="relative group z-0">
+      {/* {listed ? (
         <FaHeart
           onClick={addToListed}
           className="absolute right-4 top-4 text-[25px] text-mahroon z-10 cursor-pointer"
@@ -68,8 +72,17 @@ const ProductCard = ({ product, servings = false }) => {
           onClick={addToListed}
           className="absolute right-4 top-4 text-[25px] z-10 cursor-pointer text-mahroon"
         />
-      )}
-      <Link href={`/${product?.prod_id}`}>
+      )} */}
+
+      <button
+        onClick={() => setListOpen(true)}
+        className="bg-[#00000090] text-accent px-2 py-1 font-ropa font-medium text-lg flex gap-2 items-center absolute w-fit right-0 top-0 z-10"
+      >
+        <FaPlus className="text-accent text-lg" />
+        Add On
+      </button>
+
+      <div>
         {/* <div className="relative w-full overflow-hidden aspect-[5/6]">
           {product.product_images.map((slide, index) => (
             <div
@@ -135,6 +148,12 @@ const ProductCard = ({ product, servings = false }) => {
 
         <div className="mt-5">
           <h3 className="h4 text-accent mb-1 -mt-2">{product?.prod_name}</h3>
+          {product?.prod_desc && (
+            <p className="text-sm text-white font-ropa">
+              {" "}
+              {product?.prod_desc}
+            </p>
+          )}
           <p className="font-Raleway font-bold font-xl">
             Rs: {product?.prod_price}
           </p>
@@ -151,7 +170,7 @@ const ProductCard = ({ product, servings = false }) => {
             </div>
           )}
         </div>
-      </Link>
+      </div>
     </div>
   );
 };

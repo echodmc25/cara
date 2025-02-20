@@ -125,21 +125,21 @@ export default async function Home() {
         </div>
       </div>
       <div className="container px-5">
-        {/* <div className="mb-14 grid grid-cols-3 tablet:grid-cols-2 mobile:grid-cols-1">
-          {categories.length > 0 ? (
-            categories.map((item) => (
+        <div className="mb-14 grid grid-cols-3 tablet:grid-cols-2 mobile:grid-cols-1">
+          {categoriesList.length > 0 ? (
+            categoriesList.map((item) => (
               <CategoriesCards item={item} key={item.id} />
             ))
           ) : (
             <p className="text-center text-red-500">No categories found.</p>
           )}
-        </div> */}
-        {categoriesList.map((list) => (
+        </div>
+        {/* {categoriesList.map((list) => (
           <div className="border-t border-accent" key={list.id}>
             <h2 className="text-accent font-kaisei text-[28px] mobile:text-[20px] my-8">
               {list.cat_name}
             </h2>
-            <div className="mb-14 grid grid-cols-4 gap-5 tablet:grid-cols-3 mobile:grid-cols-1">
+            <div className="mb-14 grid grid-cols-3 gap-5 tablet:grid-cols-2 mobile:grid-cols-1">
               {list.subcategories.length > 0 ? (
                 list.subcategories.map((item) => (
                   <CategoriesCards item={item} key={item.subcat_id} />
@@ -149,7 +149,7 @@ export default async function Home() {
               )}
             </div>
           </div>
-        ))}
+        ))} */}
       </div>
     </div>
   );

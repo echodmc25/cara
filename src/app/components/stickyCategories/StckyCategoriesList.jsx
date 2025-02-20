@@ -83,7 +83,7 @@ const StckyCategoriesList = ({ categories }) => {
   };
 
   return (
-    <div className="sticky top-0 pt-10 pb-5 mobile:pt-5 bg-background z-20 overflow-hidden tablet:hidden mobile:block">
+    <div className="sticky top-0 pt-10 pb-5 mobile:pt-5 bg-background z-30 overflow-hidden tablet:hidden mobile:block">
       <div className="relative">
         <div className="absolute right-0 h-full w-10 gradient-overlay"></div>
 

@@ -117,6 +117,10 @@ body {
   font-family: var(--font-ropa);
 }
 
+.p-aspect {
+  aspect-ratio: 8 / 6;
+}
+
 [id] {
   scroll-margin-top: 100px; /* Adds a 50px spacing when scrolling */
 }
