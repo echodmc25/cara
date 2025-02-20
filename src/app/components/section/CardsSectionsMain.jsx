@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 import ProductCard from "@/app/components/cards/ProductCard";
 import Image from "next/image";
 
-import Ice1 from "@/app/assets/images/ice2.jpg";
+import Ice1 from "@/app/assets/images/Ice2.png";
 import Ice2 from "@/app/assets/images/ice1.png";
 import { FaUserAlt } from "react-icons/fa";
 import { useRouter } from "next/navigation";
