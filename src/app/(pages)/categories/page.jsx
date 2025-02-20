@@ -69,7 +69,7 @@ export default async function Menu({ params }) {
             SubCategoriesAndProducts.map((categoryObj, catIndex) => (
               <>
                 {categoryObj?.cat_id == 7 ? (
-                  <div className="mb-12">
+                  <div className="mb-12" key={categoryObj?.cat_id}>
                     <div className="flex justify-center items-center overflow-hidden h-40 mobile:h-24 relative mb-10 mt-10 tablet:mt-0 mobile:mt-0 ">
                       <div className="absolute left-0 top-0 w-full h-40 mobile:h-24 z-0 bg-background">
                         <Image
