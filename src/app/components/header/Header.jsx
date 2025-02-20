@@ -21,7 +21,7 @@ const Header = () => {
     <>
       <div
         className={`${
-          pathname === "/"
+          pathname === "/mmm"
             ? "tablet:border-b border-white/20 absolute z-50 w-full"
             : "bg-mahroon"
         }`}
@@ -51,7 +51,7 @@ const Header = () => {
                 Home
               </Link>
               <Link
-                href="/about-us"
+                href="#"
                 className={`text-ropa text-base uppercase ${
                   pathname === "/about-us" ? "text-[--accent]" : "text-white"
                 }`}
@@ -87,7 +87,7 @@ const Header = () => {
 
           <div>
             <Link
-              href="/menu"
+              href="/"
               className={` ${
                 pathname === "/"
                   ? "bg-mahroon text-accent hover:bg-accent"

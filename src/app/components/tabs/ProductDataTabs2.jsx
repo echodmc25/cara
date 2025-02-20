@@ -147,13 +147,17 @@ const ProductDataTabs2 = () => {
       </div>
 
       {/* Active Tab Content */}
-      <div className="flex gap-10 p-8 bg-black mobile:flex-col mobile:gap-0 mobile:p-5">
+      <div className="flex gap-10 px-8 py-4 bg-black mobile:flex-col mobile:gap-0 mobile:p-5">
         <div className="flex-1">
-          <div className="grid grid-cols-4 tablet:grid-cols-3 mobile:grid-cols-2 gap-5">
+          <div className="grid grid-cols-4 tablet:grid-cols-3 mobile:grid-cols-2 gap-x-5">
             {tabsData[activeTab].content.map((item, index) => (
               <div
                 key={index}
-                className="flex justify-start items-center gap-2 border-b border-[#3f3f3f] py-2"
+                className={`flex justify-start items-center gap-2 ${
+                  index < tabsData[activeTab].content.length - 1
+                    ? "border-b"
+                    : "border-none"
+                } border-[#3f3f3f] py-4`}
               >
                 {item.img && (
                   <Image
@@ -161,10 +165,10 @@ const ProductDataTabs2 = () => {
                     alt={item.name}
                     height={40}
                     width={40}
-                    className="w-10 h-10 object-contain object-center mobile:h-7 mobile:w-7"
+                    className="w-8 h-8 object-contain object-center mobile:h-6 mobile:w-6"
                   />
                 )}
-                <h3 className="font-ropa text-lg text-accent capitalize mobile:text-sm">
+                <h3 className="font-ropa text-base text-accent capitalize mobile:text-sm">
                   {item.name}
                 </h3>
               </div>

@@ -149,7 +149,7 @@ const ProductCard = ({ product, servings = false }) => {
         <div className="mt-5">
           <h3 className="h4 text-accent mb-1 -mt-2">{product?.prod_name}</h3>
           {product?.prod_desc && (
-            <p className="text-sm text-white font-ropa">
+            <p className="text-base text-white/50 font-ropa mb-3 leading-5">
               {" "}
               {product?.prod_desc}
             </p>
