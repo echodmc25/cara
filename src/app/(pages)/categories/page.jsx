@@ -61,7 +61,7 @@ export default async function Menu({ params }) {
   // }
 
   return (
-    <div className="pb-10 laptop:px-8 laptop:pb-56 mobile:pb-10  mobile:px-5">
+    <div className="pb-10 laptop:px-8 laptop:pb-56 tablet:pb-10 mobile:pb-10  mobile:px-5">
       <div className="container relative">
         <StckyCategoriesList categories={categories} />
         <div className="tablet:pt-5 mobile:pt-0 relative ">
@@ -70,7 +70,7 @@ export default async function Menu({ params }) {
               <>
                 {categoryObj?.cat_id == 7 ? (
                   <div className="mb-12">
-                    <div className="flex justify-center items-center overflow-hidden h-40 mobile:h-24 relative mb-10 mt-10 tablet:mt-0 mobile:mt-0   ">
+                    <div className="flex justify-center items-center overflow-hidden h-40 mobile:h-24 relative mb-10 mt-10 tablet:mt-0 mobile:mt-0 ">
                       <div className="absolute left-0 top-0 w-full h-40 mobile:h-24 z-0 bg-background">
                         <Image
                           src={Ice1}
@@ -84,7 +84,10 @@ export default async function Menu({ params }) {
                         Unbelievably In Love With Gelato!
                       </h1>
                     </div>
-                    <div className="flex justify-between items-center">
+                    <div
+                      className="flex justify-between items-center border-t border-accent pt-5"
+                      id="make-your-own-bowl-3-scoops-2-sauces-2-toppings"
+                    >
                       <div>
                         <h2 className="font-kaisei text-[28px] text-accent">
                           Make your own bowl
@@ -109,7 +112,7 @@ export default async function Menu({ params }) {
                         </div>
                       </div>
                     </div>
-                    <div className=" mt-10">
+                    <div className=" mt-8">
                       <Image
                         src={Ice2}
                         alt="icen cream"
@@ -126,7 +129,7 @@ export default async function Menu({ params }) {
                   <div key={categoryObj.cat_id}>
                     {/* Main Category Name */}
 
-                    <div className="flex justify-center items-center overflow-hidden h-40 mobile:h-24 relative mb-10 mt-10 tablet:mt-0 mobile:mt-0   ">
+                    <div className="flex justify-center items-center overflow-hidden h-40 mobile:h-24 relative mb-10 mt-10 mobile:mt-6   ">
                       <div className="absolute left-0 top-0 w-full h-40 mobile:h-24 z-0 bg-background">
                         <Image
                           src={categoryObj.cat_image}
@@ -186,7 +189,7 @@ export default async function Menu({ params }) {
                                       />
                                     </div>
                                     <div className="w-full min-h-full max-w-1/2 flex flex-col justify-between items-start">
-                                      <div className="">
+                                      <div className=" w-full">
                                         <h3 className="h4 mb-3 text-accent">
                                           {product.prod_name}
                                         </h3>

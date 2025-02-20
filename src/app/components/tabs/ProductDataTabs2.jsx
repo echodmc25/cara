@@ -18,7 +18,7 @@ import Lotus from "@/app/assets/images/Lotus.png";
 import SaltedCaramel from "@/app/assets/images/Salted caramel.png";
 import WhiteChocolateRaspberry from "@/app/assets/images/White chocolate with raspberry.png";
 import Berrylicious from "@/app/assets/images/Berrylicious.png";
-// import Tiramisu from "@/app/assets/images/tiramisu.png";
+import Tiramisu from "@/app/assets/images/Tiramisu.png";
 import Pistachio from "@/app/assets/images/Pista.png";
 import BubbleGum from "@/app/assets/images/Bubble gum.png";
 import CottonCandy from "@/app/assets/images/Cotton Candy.png";
@@ -44,7 +44,7 @@ const ProductDataTabs2 = () => {
           img: WhiteChocolateRaspberry,
         },
         { name: "Berrylicious", img: Berrylicious },
-        { name: "Tiramisu", img: Geleto1 },
+        { name: "Tiramisu", img: Tiramisu },
         { name: "Pistachio", img: Pistachio },
         { name: "Bubble Gum", img: BubbleGum },
         { name: "Cotton Candy", img: CottonCandy },
