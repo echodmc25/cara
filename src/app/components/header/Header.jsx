@@ -59,7 +59,7 @@ const Header = () => {
                 About Us
               </Link>
               <Link
-                href="/franchise"
+                href="#"
                 className={`text-ropa text-base uppercase ${
                   pathname === "/franchise" ? "text-[--accent]" : "text-white"
                 }`}
@@ -67,7 +67,7 @@ const Header = () => {
                 Franchise
               </Link>
               <Link
-                href="/catering"
+                href="#"
                 className={`text-ropa text-base uppercase ${
                   pathname === "/catering" ? "text-[--accent]" : "text-white"
                 }`}
@@ -75,7 +75,7 @@ const Header = () => {
                 Catering
               </Link>
               <Link
-                href="/contact"
+                href="#"
                 className={`text-ropa text-base uppercase ${
                   pathname === "/contact" ? "text-[--accent]" : "text-white"
                 }`}
@@ -164,7 +164,7 @@ const Header = () => {
             </Link>
             <Link
               onClick={toggleMenu}
-              href="/franchise"
+              href="#"
               className={`text-ropa text-3xl  uppercase ${
                 pathname === "/franchise" ? "text-[--accent]" : "text-white"
               }`}
@@ -173,7 +173,7 @@ const Header = () => {
             </Link>
             <Link
               onClick={toggleMenu}
-              href="/catering"
+              href="#"
               className={`text-ropa text-3xl  uppercase ${
                 pathname === "/catering" ? "text-[--accent]" : "text-white"
               }`}
@@ -182,7 +182,7 @@ const Header = () => {
             </Link>
             <Link
               onClick={toggleMenu}
-              href="/contact"
+              href="#"
               className={`text-ropa text-3xl  uppercase ${
                 pathname === "/contact" ? "text-[--accent]" : "text-white"
               }`}

@@ -64,7 +64,7 @@ const Footer = () => {
               <ul className=" flex flex-col gap-2">
                 <li>
                   <Link
-                    href={"/gallery"}
+                    href={"#"}
                     className="font-ropa text-base text-white uppercase"
                   >
                     Gallery
@@ -72,7 +72,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    href={"/career"}
+                    href={"#"}
                     className="font-ropa text-base text-white uppercase"
                   >
                     Career
