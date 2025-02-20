@@ -63,7 +63,7 @@ const CardsSectionsMain = ({ SubCategoriesAndProducts }) => {
                     />
                   </div>
                   <h1 className="font-arizonia text-[48px] mobile:text-[28px] text-center text-accent text-primary relative z-10">
-                    Unbelievably In Love With Gelato!
+                    Unbowlievably In Love With Gelato!
                   </h1>
                 </div>
                 <div
