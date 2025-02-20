@@ -109,7 +109,7 @@ const Header = () => {
         {/* Mobile Sliding Menu */}
       </div>
       <div
-        className={`fixed h-full w-full top-0 left-0 bg-mahroon z-20 transition-transform duration-300 ${
+        className={`fixed h-full w-full top-0 left-0 bg-mahroon z-50 transition-transform duration-300 ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
