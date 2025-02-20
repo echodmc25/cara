@@ -22,7 +22,7 @@ const Header = () => {
       <div
         className={`${
           pathname === "/"
-            ? "tablet:border-b border-white/20 absolute z-10 w-full"
+            ? "tablet:border-b border-white/20 absolute z-50 w-full"
             : "bg-mahroon"
         }`}
       >
@@ -109,7 +109,7 @@ const Header = () => {
         {/* Mobile Sliding Menu */}
       </div>
       <div
-        className={`fixed h-full w-full top-0 left-0 bg-mahroon z transition-transform duration-300 ${
+        className={`fixed h-full w-full top-0 left-0 bg-mahroon z-20 transition-transform duration-300 ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
