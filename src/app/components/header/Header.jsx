@@ -155,9 +155,9 @@ const Header = () => {
             </Link>
             <Link
               onClick={toggleMenu}
-              href="/menu"
+              href="#"
               className={`text-ropa text-3xl  uppercase ${
-                pathname === "/menu" ? "text-[--accent]" : "text-white"
+                pathname === "/" ? "text-[--accent]" : "text-white"
               }`}
             >
               Menu
