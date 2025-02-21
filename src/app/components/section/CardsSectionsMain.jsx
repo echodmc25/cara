@@ -4,7 +4,7 @@ import ProductCard from "@/app/components/cards/ProductCard";
 import Image from "next/image";
 
 import Ice1 from "@/app/assets/images/Ice2.png";
-import Ice2 from "@/app/assets/images/ice1.png";
+import Ice2 from "@/app/assets/images/Pr.jpg";
 import { FaUserAlt } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import ProductDataTabs2 from "@/app/components/tabs/ProductDataTabs2";
@@ -59,16 +59,16 @@ const CardsSectionsMain = ({ SubCategoriesAndProducts }) => {
                       alt={"ice cream"}
                       width="1024"
                       height="1024"
-                      className="w-full object-cover h-full object-center opacity-55"
+                      className="w-full object-cover h-full object-center opacity-30"
                     />
                   </div>
-                  <h1 className="font-arizonia text-[48px] mobile:text-[28px] text-center text-accent text-primary relative z-10">
+                  <h1 className="font-bodoni text-[48px] mobile:text-[28px] text-center text-accent text-primary relative z-10">
                     Unbowlievably In Love With Gelato!
                   </h1>
                 </div>
                 <div
                   className="flex justify-between items-center border-t border-accent pt-3"
-                  id="make-your-own-bowl-3-scoops-2-sauces-2-toppings"
+                  id="gelato-bowls"
                   //   ref={(el) => (subcategoryRefs.current[index] = el)}
                 >
                   <div>
@@ -101,7 +101,7 @@ const CardsSectionsMain = ({ SubCategoriesAndProducts }) => {
                     alt="icen cream"
                     height={2000}
                     width={2000}
-                    className=""
+                    className="aspect-video object-cover"
                   />
                 </div>
                 <div className="tabs">
@@ -123,10 +123,10 @@ const CardsSectionsMain = ({ SubCategoriesAndProducts }) => {
                       alt={categoryObj.cat_name}
                       width="1024"
                       height="1024"
-                      className="w-full object-cover h-full object-center opacity-55"
+                      className="w-full object-cover h-full object-center opacity-30"
                     />
                   </div>
-                  <h1 className="font-arizonia text-[48px] mobile:text-[28px] text-center text-accent text-primary relative z-10">
+                  <h1 className="font-bodoni text-[48px] mobile:text-[28px] text-center text-accent text-primary relative z-10">
                     {categoryObj.cat_name}
                   </h1>
                 </div>
@@ -193,8 +193,17 @@ const CardsSectionsMain = ({ SubCategoriesAndProducts }) => {
                                             Servings:
                                           </h3>
                                           <div className="flex gap-2 bg-mahroon rounded-3xl px-2 py-1 mobile:p-1">
-                                            <FaUserAlt className="text-accent text-[10px] " />
-                                            <FaUserAlt className="text-accent text-[10px] " />
+                                            {/* <FaUserAlt className="text-accent text-[10px] " />
+                                            <FaUserAlt className="text-accent text-[10px] " /> */}
+                                            {Array.from(
+                                              { length: product?.prod_serving },
+                                              (_, i) => (
+                                                <FaUserAlt
+                                                  key={i}
+                                                  className="text-accent text-[10px] "
+                                                />
+                                              )
+                                            )}
                                           </div>
                                         </div>
                                       </div>
@@ -210,9 +219,21 @@ const CardsSectionsMain = ({ SubCategoriesAndProducts }) => {
                                             Servings:
                                           </h3>
                                           <div className="flex gap-2 bg-mahroon rounded-3xl px-2 py-1 mobile:p-1">
+                                            {/* <FaUserAlt className="text-accent text-[10px] " />
                                             <FaUserAlt className="text-accent text-[10px] " />
-                                            <FaUserAlt className="text-accent text-[10px] " />
-                                            <FaUserAlt className="text-accent text-[10px] " />
+                                            <FaUserAlt className="text-accent text-[10px] " /> */}
+                                            {Array.from(
+                                              {
+                                                length:
+                                                  product?.prod_servingDouble,
+                                              },
+                                              (_, i) => (
+                                                <FaUserAlt
+                                                  key={i}
+                                                  className="text-accent text-[10px] "
+                                                />
+                                              )
+                                            )}
                                           </div>
                                         </div>
                                       </div>

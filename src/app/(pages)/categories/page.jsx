@@ -47,12 +47,16 @@ export default async function Menu({ params }) {
   const SubCategoriesAndProducts = await getSubCategoriesWithProducts(cat_id);
   const categories = await getCategories(); // Fetch data on the server
 
+  const sortedCategoriesList = categories.sort(
+    (a, b) => a.position - b.position
+  );
+
   console.log(SubCategoriesAndProducts);
 
   return (
     <div className="pb-10 laptop:px-8 laptop:pb-56 tablet:pb-10 mobile:pb-10  mobile:px-5">
       <div className="container relative">
-        <StckyCategoriesList categories={categories} />
+        <StckyCategoriesList categories={sortedCategoriesList} />
         <div className="relative">
           <CardsSectionsMain
             SubCategoriesAndProducts={SubCategoriesAndProducts}
@@ -60,7 +64,7 @@ export default async function Menu({ params }) {
         </div>
       </div>
       <TabsPopup />
-      <FixedCategoryList categories={categories} />
+      <FixedCategoryList categories={sortedCategoriesList} />
     </div>
   );
 }

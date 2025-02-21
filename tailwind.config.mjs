@@ -23,6 +23,7 @@ export default {
         arizonia: "var(--font-arizonia)",
         ropa: "var(--font-ropa)",
         Raleway: "var(--font-raleway)",
+        bodoni: "var(--font-bodoni)",
       },
     },
     screens: {

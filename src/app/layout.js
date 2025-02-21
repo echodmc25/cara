@@ -1,4 +1,4 @@
-import { Arizonia, Raleway, Ropa_Sans } from "next/font/google";
+import { Arizonia, Bodoni_Moda, Raleway, Ropa_Sans } from "next/font/google";
 import "./globals.css";
 // import Header from "./components/header/Header";
 // import StickyCategories from "./components/stickyCategories/StickyCategories";
@@ -17,6 +17,12 @@ import { PopupProvider } from "./context/PopContext";
 
 const arizonia = Arizonia({
   variable: "--font-arizonia",
+  weight: ["400"],
+  subsets: ["latin"],
+});
+
+const bodoni = Bodoni_Moda({
+  variable: "--font-bodoni",
   weight: ["400"],
   subsets: ["latin"],
 });
@@ -48,7 +54,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body
-        className={`${ropa.variable} ${raleway.variable} ${arizonia.variable} `}
+        className={`${ropa.variable} ${raleway.variable} ${bodoni.variable} ${arizonia.variable} `}
       >
         <CartProvider>
           <HeaderWrapper />

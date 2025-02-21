@@ -250,6 +250,10 @@ export default async function Home() {
 
   const categoriesList = await getCategoriesList(); // Fetch data on the server
 
+  const sortedCategoriesList = categoriesList.sort(
+    (a, b) => a.position - b.position
+  );
+
   return (
     <div className="">
       <div className="pt-14 pb-24 mobile:pb-14 mobile:pt-12 px-5 flex justify-center items-center">
@@ -268,8 +272,8 @@ export default async function Home() {
       </div>
       <div className="container px-5">
         <div className="mb-14 grid grid-cols-3 tablet:grid-cols-2 mobile:grid-cols-1">
-          {categoriesList.length > 0 ? (
-            categoriesList.map((item) => (
+          {sortedCategoriesList.length > 0 ? (
+            sortedCategoriesList.map((item) => (
               <CategoriesCards item={item} key={item.id} />
             ))
           ) : (

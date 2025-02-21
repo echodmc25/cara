@@ -241,10 +241,10 @@ const FixedCategoryList = ({ categories }) => {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 tablet:px-8 w-full pt-8 pb-5 bg-black z-10 overflow-hidden hidden tablet:block mobile:hidden">
+    <div className="fixed bottom-0 left-0 tablet:px-8 w-full pt-8 pb-5 mobile:pt-3 mobile:px-2 bg-black z-10 overflow-hidden hidden tablet:block ">
       <div className="relative container">
         <div
-          className="inline-flex gap-5 overflow-x-auto draggable cursor-grab w-full"
+          className="inline-flex gap-2 overflow-x-auto draggable cursor-grab w-full"
           ref={draggableRef}
         >
           {categories.map((category) => {
@@ -266,18 +266,18 @@ const FixedCategoryList = ({ categories }) => {
                   }
                 }}
               >
-                <div className="grid gap-3 justify-between items-start h-full min-w-[100px]">
+                <div className="grid gap-3 justify-between items-start h-full min-w-[100px] mobile:min-w-16">
                   <Image
                     src={category?.sub_catimg}
                     alt={category?.sub_catname}
                     width={100} // ✅ Required for Next.js Image optimization
                     height={100} // ✅ Required for Next.js Image optimization
-                    className={`w-[100px] h-[100px] object-cover object-center rounded-full border-[4px] ${
+                    className={`w-[100px] h-[100px] mobile:h-14 mobile:w-14 object-cover object-center rounded-full border-[4px] ${
                       isActive ? "border-mahroon" : "border-black"
                     }`}
                   />
                   <h2
-                    className={`font-ropa text-base text-center line-clamp-1 ${
+                    className={`font-ropa text-base mobile:text-xs text-center line-clamp-1 ${
                       isActive ? "text-accent" : "text-white"
                     }`}
                   >

@@ -154,7 +154,7 @@ const ProductDataTabs2 = () => {
               <div
                 key={index}
                 className={`flex justify-start items-center gap-2 ${
-                  index < tabsData[activeTab].content.length - 1
+                  index < tabsData[activeTab].content.length
                     ? "border-b"
                     : "border-none"
                 } border-[#3f3f3f] py-4`}
