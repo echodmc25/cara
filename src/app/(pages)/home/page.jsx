@@ -258,8 +258,8 @@ export default async function Home() {
     <div className="">
       <div className="pt-14 pb-24 mobile:pb-14 mobile:pt-12 px-5 flex justify-center items-center">
         <div className="max-w-[660px]">
-          <h3 className="font-arizonia text-[36px] mobile:text-[24px] leading-tight mb-2 text-mahroon text-center">
-            Loaded Desserts For Every Craving
+          <h3 className="font-bodoni text-[36px] mobile:text-[24px] leading-tight mb-2 text-mahroon text-center">
+            Why should happiness come with a boarding pass?
           </h3>
           <h1 className="page-heading text-[--accent] leading-[64px] uppercase text-center">
             Menu
