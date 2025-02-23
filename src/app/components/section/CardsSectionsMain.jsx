@@ -11,44 +11,14 @@ import ProductDataTabs2 from "@/app/components/tabs/ProductDataTabs2";
 import AddOnButton from "@/app/components/button/AddOnButton";
 
 const CardsSectionsMain = ({ SubCategoriesAndProducts }) => {
-  //   const router = useRouter();
-  //   const subcategoryRefs = useRef([]);
-  //   useEffect(() => {
-  //     const observer = new IntersectionObserver(
-  //       (entries) => {
-  //         entries.forEach((entry) => {
-  //           if (entry.isIntersecting) {
-  //             const id = entry.target.id;
-  //             if (id) {
-  //               router.replace(`#${id}`);
-  //             }
-  //           }
-  //         });
-  //       },
-  //       {
-  //         root: null, // Use the viewport as the root
-  //         rootMargin: "0px",
-  //         threshold: 0.5, // Trigger when at least 50% of the element is visible
-  //       }
-  //     );
-
-  //     // Observe each subcategory
-  //     subcategoryRefs.current.forEach((ref) => {
-  //       if (ref) observer.observe(ref);
-  //     });
-
-  //     // Cleanup observer on unmount
-  //     return () => {
-  //       subcategoryRefs.current.forEach((ref) => {
-  //         if (ref) observer.unobserve(ref);
-  //       });
-  //     };
-  //   }, []);
+  const sortedCategoriesList = SubCategoriesAndProducts.sort(
+    (a, b) => a.cat_position - b.cat_position
+  );
 
   return (
     <>
-      {SubCategoriesAndProducts?.length > 0 &&
-        SubCategoriesAndProducts.map((categoryObj, catIndex) => (
+      {sortedCategoriesList?.length > 0 &&
+        sortedCategoriesList.map((categoryObj, catIndex) => (
           <React.Fragment key={categoryObj?.cat_id}>
             {categoryObj?.cat_id == 7 ? (
               <div className="mb-12" key={categoryObj?.cat_id}>
@@ -69,7 +39,6 @@ const CardsSectionsMain = ({ SubCategoriesAndProducts }) => {
                 <div
                   className="flex justify-between items-center border-t border-accent pt-3"
                   id="gelato-bowls"
-                  //   ref={(el) => (subcategoryRefs.current[index] = el)}
                 >
                   <div>
                     <h2 className="font-kaisei text-[28px] text-accent">
@@ -133,140 +102,138 @@ const CardsSectionsMain = ({ SubCategoriesAndProducts }) => {
 
                 {/* Now, map over subcategories */}
                 {categoryObj.sub_categories?.length > 0 &&
-                  categoryObj.sub_categories.map((subCategory, index) => (
-                    <div
-                      key={subCategory?.subcat_id}
-                      id={
-                        subCategory?.sub_catname
-                          ? subCategory.sub_catname
-                              .replace(/[^\w\s-]/g, "")
-                              .replace(/\s+/g, "-")
-                              .toLowerCase()
-                          : "default-id"
-                      }
-                      //   ref={(el) => (subcategoryRefs.current[index] = el)}
-                    >
-                      {/* Divider between subcategories (but not after the last one) */}
-                      {/* {index < categoryObj.sub_categories.length - 1 && (
-                        <div className="w-full h-[1px] bg-accent mt-12 mb-5"></div>
-                      )} */}
-
-                      {/* Subcategory Name */}
-                      <h2 className="h2 text-accent pt-3 border-t border-accent mt-6">
-                        {subCategory?.sub_catname}
-                      </h2>
-                      {subCategory?.sub_catname == "Waffles" ? (
-                        <>
-                          {subCategory?.products?.length > 0 ? (
-                            subCategory.products.map((product) => (
-                              <div
-                                className="flex justify-between items-stretch gap-6 mb-12 mt-5 mobile:flex-col "
-                                key={product.prod_id}
-                              >
-                                <div className="max-w-1/2 w-full p-aspect">
-                                  <Image
-                                    src={product?.product_images?.[0]?.src}
-                                    alt={product.prod_name}
-                                    height={1024}
-                                    width={1024}
-                                    className="w-full h-full object-cover"
-                                  />
-                                </div>
-                                <div className="w-full min-h-full max-w-1/2 flex flex-col justify-between items-start">
-                                  <div className=" w-full">
-                                    <h3 className="h4 mb-3 text-accent">
-                                      {product.prod_name}
-                                    </h3>
-                                    <p className="font-ropa text-base text-white/50  leading-5">
-                                      {product?.prod_desc}
-                                    </p>
-                                    <div className="flex justify-between items-start gap-5 my-7">
-                                      <div>
-                                        <h2 className="h4  text-accent">
-                                          Single Stack
-                                        </h2>
-                                        <p className="font-Raleway text-lg font-bold">
-                                          Rs. {product.prod_price}
-                                        </p>
-                                        <div className="flex gap-2  items-center justify-end mobile:gap-2 mt-1">
-                                          <h3 className="text-white/50 text-md mobile:text-base font-ropa">
-                                            Servings:
-                                          </h3>
-                                          <div className="flex gap-2 bg-mahroon rounded-3xl px-2 py-1 mobile:p-1">
-                                            {/* <FaUserAlt className="text-accent text-[10px] " />
+                  [...categoryObj.sub_categories]
+                    .sort((a, b) => a.position - b.position)
+                    .map((subCategory, index) => (
+                      <div
+                        key={subCategory?.subcat_id}
+                        id={
+                          subCategory?.sub_catname
+                            ? subCategory.sub_catname
+                                .replace(/[^\w\s-]/g, "")
+                                .replace(/\s+/g, "-")
+                                .toLowerCase()
+                            : "default-id"
+                        }
+                      >
+                        {/* Subcategory Name */}
+                        <h2 className="h2 text-accent pt-3 border-t border-accent mt-6">
+                          {subCategory?.sub_catname}
+                        </h2>
+                        {subCategory?.sub_catname == "Waffles" ? (
+                          <>
+                            {subCategory?.products?.length > 0 ? (
+                              subCategory.products.map((product) => (
+                                <div
+                                  className="flex justify-between items-stretch gap-6 mb-12 mt-5 mobile:flex-col "
+                                  key={product.prod_id}
+                                >
+                                  <div className="max-w-1/2 w-full p-aspect">
+                                    <Image
+                                      src={product?.product_images?.[0]?.src}
+                                      alt={product.prod_name}
+                                      height={1024}
+                                      width={1024}
+                                      className="w-full h-full object-cover"
+                                    />
+                                  </div>
+                                  <div className="w-full min-h-full max-w-1/2 flex flex-col justify-between items-start">
+                                    <div className=" w-full">
+                                      <h3 className="h4 mb-3 text-accent">
+                                        {product.prod_name}
+                                      </h3>
+                                      <p className="font-ropa text-base text-white/50  leading-5">
+                                        {product?.prod_desc}
+                                      </p>
+                                      <div className="flex justify-between items-start gap-5 my-7">
+                                        <div>
+                                          <h2 className="h4  text-accent">
+                                            Single Stack
+                                          </h2>
+                                          <p className="font-Raleway text-lg font-bold">
+                                            Rs. {product.prod_price}
+                                          </p>
+                                          <div className="flex gap-2  items-center justify-end mobile:gap-2 mt-1">
+                                            <h3 className="text-white/50 text-md mobile:text-base font-ropa">
+                                              Servings:
+                                            </h3>
+                                            <div className="flex gap-2 bg-mahroon rounded-3xl px-2 py-1 mobile:p-1">
+                                              {/* <FaUserAlt className="text-accent text-[10px] " />
                                             <FaUserAlt className="text-accent text-[10px] " /> */}
-                                            {Array.from(
-                                              { length: product?.prod_serving },
-                                              (_, i) => (
-                                                <FaUserAlt
-                                                  key={i}
-                                                  className="text-accent text-[10px] "
-                                                />
-                                              )
-                                            )}
+                                              {Array.from(
+                                                {
+                                                  length: product?.prod_serving,
+                                                },
+                                                (_, i) => (
+                                                  <FaUserAlt
+                                                    key={i}
+                                                    className="text-accent text-[10px] "
+                                                  />
+                                                )
+                                              )}
+                                            </div>
                                           </div>
                                         </div>
-                                      </div>
-                                      <div>
-                                        <h2 className="h4 text-accent">
-                                          Double Stack
-                                        </h2>
-                                        <p className="font-Raleway text-lg font-bold">
-                                          Rs. {product.prod_doublePrice}
-                                        </p>
-                                        <div className="flex gap-2  items-center justify-end mobile:gap-2 mt-1">
-                                          <h3 className="text-white/50 text-md mobile:text-base font-ropa">
-                                            Servings:
-                                          </h3>
-                                          <div className="flex gap-2 bg-mahroon rounded-3xl px-2 py-1 mobile:p-1">
-                                            {/* <FaUserAlt className="text-accent text-[10px] " />
+                                        <div>
+                                          <h2 className="h4 text-accent">
+                                            Double Stack
+                                          </h2>
+                                          <p className="font-Raleway text-lg font-bold">
+                                            Rs. {product.prod_doublePrice}
+                                          </p>
+                                          <div className="flex gap-2  items-center justify-end mobile:gap-2 mt-1">
+                                            <h3 className="text-white/50 text-md mobile:text-base font-ropa">
+                                              Servings:
+                                            </h3>
+                                            <div className="flex gap-2 bg-mahroon rounded-3xl px-2 py-1 mobile:p-1">
+                                              {/* <FaUserAlt className="text-accent text-[10px] " />
                                             <FaUserAlt className="text-accent text-[10px] " />
                                             <FaUserAlt className="text-accent text-[10px] " /> */}
-                                            {Array.from(
-                                              {
-                                                length:
-                                                  product?.prod_servingDouble,
-                                              },
-                                              (_, i) => (
-                                                <FaUserAlt
-                                                  key={i}
-                                                  className="text-accent text-[10px] "
-                                                />
-                                              )
-                                            )}
+                                              {Array.from(
+                                                {
+                                                  length:
+                                                    product?.prod_servingDouble,
+                                                },
+                                                (_, i) => (
+                                                  <FaUserAlt
+                                                    key={i}
+                                                    className="text-accent text-[10px] "
+                                                  />
+                                                )
+                                              )}
+                                            </div>
                                           </div>
                                         </div>
+                                        <div></div>
                                       </div>
-                                      <div></div>
+                                    </div>
+                                    <div className="">
+                                      <AddOnButton />
                                     </div>
                                   </div>
-                                  <div className="">
-                                    <AddOnButton />
-                                  </div>
                                 </div>
-                              </div>
-                            ))
-                          ) : (
-                            <p>No products found</p>
-                          )}
-                        </>
-                      ) : (
-                        <div className="grid grid-cols-4 tablet:grid-cols-3 mobile:grid-cols-2 gap-y-10 gap-x-5 mt-5 mobile:mt-5">
-                          {subCategory?.products?.length > 0 ? (
-                            subCategory.products.map((product) => (
-                              <ProductCard
-                                product={product}
-                                key={product?.prod_id}
-                                servings={true}
-                              />
-                            ))
-                          ) : (
-                            <p>No products found</p>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                              ))
+                            ) : (
+                              <p>No products found</p>
+                            )}
+                          </>
+                        ) : (
+                          <div className="grid grid-cols-4 tablet:grid-cols-3 mobile:grid-cols-2 gap-y-10 gap-x-5 mt-5 mobile:mt-5">
+                            {subCategory?.products?.length > 0 ? (
+                              subCategory.products.map((product) => (
+                                <ProductCard
+                                  product={product}
+                                  key={product?.prod_id}
+                                  servings={true}
+                                />
+                              ))
+                            ) : (
+                              <p>No products found</p>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    ))}
 
                 {/* Divider between categories (but not after the last one) */}
                 {/* {catIndex < SubCategoriesAndProducts.length - 1 && (
