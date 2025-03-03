@@ -79,7 +79,7 @@ const BannerSlider = ({ slides }) => {
             alt={`Slide ${index + 1}`}
             width={3200}
             height={3200}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover opacity-70"
           />
           <div className="absolute pt-10 w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <div className="flex flex-col justify-center items-center gap-12 px-5">

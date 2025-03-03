@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import Banner from "@/app/assets/images/banner.png";
+import Banner from "@/app/assets/images/mainimg.jpg";
 import Left from "@/app/assets/images/left-lines.png";
 import Right from "@/app/assets/images/right-lines.png";
 import P1 from "@/app/assets/images/1pp.jpg";
