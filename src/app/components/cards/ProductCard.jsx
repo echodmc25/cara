@@ -1,12 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import Pi1 from "@/app/assets/images/pp1.png";
-import { FaUserAlt } from "react-icons/fa";
-import { FaRegHeart } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
+
 import { FaPlus } from "react-icons/fa6";
 import { usePopup } from "@/app/context/PopContext";
 
@@ -150,7 +146,7 @@ const ProductCard = ({ product, servings = false }) => {
           <h3 className="h4 text-accent mb-1 -mt-2">{product?.prod_name}</h3>
           {product?.prod_desc && (
             <p className="text-base text-white/50 font-ropa mb-3 leading-5">
-              {" "}
+              
               {product?.prod_desc}
             </p>
           )}
@@ -163,9 +159,12 @@ const ProductCard = ({ product, servings = false }) => {
                 Servings:
               </h3>
               <div className="flex gap-2 bg-mahroon rounded-3xl px-2 py-1 mobile:p-1">
-                {Array.from({ length: product?.prod_serving }, (_, i) => (
+                {/* {Array.from({ length: product?.prod_serving }, (_, i) => (
                   <FaUserAlt key={i} className="text-accent text-[10px] " />
-                ))}
+                ))} */}
+                <p className="text-[14px] text-accent font-bold font-ropa">
+                                              {product?.prod_serving}
+                                              </p>
               </div>
             </div>
           )}

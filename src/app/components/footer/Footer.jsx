@@ -64,7 +64,7 @@ const Footer = () => {
               <ul className=" flex flex-col gap-2">
                 <li>
                   <Link
-                    href={"#"}
+                    href={"/gallery"}
                     className="font-ropa text-base text-white uppercase"
                   >
                     Gallery
@@ -72,7 +72,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    href={"#"}
+                    href={"/career"}
                     className="font-ropa text-base text-white uppercase"
                   >
                     Career
@@ -98,45 +98,45 @@ const Footer = () => {
             </div>
             <div>
               <h2 className="font-kaisei text-accent text-xl mb-5">
-                Cafe Timing:
+                Ramdan Timing:
               </h2>
               <div className=" flex flex-col gap-2">
                 <div className="flex justify-between items-center font-ropa gap-5 text-base">
                   <span className="w-20">Monday</span>
                   <span>:</span>
-                  <span>05:00 PM to 02:00 AM</span>
+                  <span>07:00 PM to 03:00 AM</span>
                 </div>
                 <div className="flex justify-between items-center font-ropa gap-5 text-base">
                   <span className="w-20">Monday</span>
                   <span>:</span>
-                  <span>05:00 PM to 02:00 AM</span>
+                  <span>07:00 PM to 03:00 AM</span>
                 </div>
                 <div className="flex justify-between items-center font-ropa gap-5 text-base">
                   <span className="w-20">Tuesday</span>
                   <span>:</span>
-                  <span>05:00 PM to 02:00 AM</span>
+                  <span>07:00 PM to 03:00 AM</span>
                 </div>
                 <div className="flex justify-between items-center font-ropa gap-5 text-base">
                   <span className="w-20">Wednesday</span>
                   <span>:</span>
-                  <span>05:00 PM to 02:00 AM</span>
+                  <span>07:00 PM to 03:00 AM</span>
                 </div>
                 <div className="flex justify-between items-center font-ropa gap-5 text-base">
                   <span className="w-20">Friday</span>
                   <span>:</span>
-                  <span>05:00 PM to 02:00 AM</span>
+                  <span>07:00 PM to 03:00 AM</span>
                 </div>
 
                 <div className="flex justify-between items-center font-ropa gap-5 text-base">
                   <span className="w-20">Saturday</span>
                   <span>:</span>
-                  <span>05:00 PM to 02:00 AM</span>
+                  <span>07:00 PM to 03:00 AM</span>
                 </div>
 
                 <div className="flex justify-between items-center font-ropa gap-5 text-base">
                   <span className="w-20">Sunday</span>
                   <span>:</span>
-                  <span>05:00 PM to 02:00 AM</span>
+                  <span>07:00 PM to 03:00 AM</span>
                 </div>
               </div>
             </div>

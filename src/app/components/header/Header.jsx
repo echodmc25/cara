@@ -21,7 +21,7 @@ const Header = () => {
     <>
       <div
         className={`${
-          pathname === "/mmm"
+          pathname === "/"
             ? "tablet:border-b border-white/20 absolute z-50 w-full"
             : "bg-mahroon"
         }`}
@@ -51,7 +51,7 @@ const Header = () => {
                 Home
               </Link>
               <Link
-                href="#"
+                href="/about-us"
                 className={`text-ropa text-base uppercase ${
                   pathname === "/about-us" ? "text-[--accent]" : "text-white"
                 }`}
@@ -59,23 +59,23 @@ const Header = () => {
                 About Us
               </Link>
               <Link
-                href="#"
+                href="/franchise"
                 className={`text-ropa text-base uppercase ${
                   pathname === "/franchise" ? "text-[--accent]" : "text-white"
                 }`}
               >
                 Franchise
               </Link>
-              <Link
+              {/* <Link
                 href="#"
                 className={`text-ropa text-base uppercase ${
                   pathname === "/catering" ? "text-[--accent]" : "text-white"
                 }`}
               >
                 Catering
-              </Link>
+              </Link> */}
               <Link
-                href="#"
+                href="/contact"
                 className={`text-ropa text-base uppercase ${
                   pathname === "/contact" ? "text-[--accent]" : "text-white"
                 }`}
@@ -87,9 +87,9 @@ const Header = () => {
 
           <div>
             <Link
-              href="/"
+              href="/menu"
               className={` ${
-                pathname === "/"
+                pathname == "/"
                   ? "bg-mahroon text-accent hover:bg-accent"
                   : "bg-accent text-mahroon hover:bg-white"
               } font-kaisei font-bold text-lg py-4 px-14 rounded-[50px] hover:text-mahroon hover:bg-accent duration-300 tablet:hidden`}
@@ -155,34 +155,34 @@ const Header = () => {
             </Link>
             <Link
               onClick={toggleMenu}
-              href="#"
+              href="/menu"
               className={`text-ropa text-3xl  uppercase ${
-                pathname === "/" ? "text-[--accent]" : "text-white"
+                pathname === "/menu" ? "text-[--accent]" : "text-white"
               }`}
             >
               Menu
             </Link>
             <Link
               onClick={toggleMenu}
-              href="#"
+              href="/franchise"
               className={`text-ropa text-3xl  uppercase ${
                 pathname === "/franchise" ? "text-[--accent]" : "text-white"
               }`}
             >
               Franchise
             </Link>
-            <Link
+            {/* <Link
               onClick={toggleMenu}
-              href="#"
+              href="/catering"
               className={`text-ropa text-3xl  uppercase ${
                 pathname === "/catering" ? "text-[--accent]" : "text-white"
               }`}
             >
               Catering
-            </Link>
+            </Link> */}
             <Link
               onClick={toggleMenu}
-              href="#"
+              href="/contact"
               className={`text-ropa text-3xl  uppercase ${
                 pathname === "/contact" ? "text-[--accent]" : "text-white"
               }`}

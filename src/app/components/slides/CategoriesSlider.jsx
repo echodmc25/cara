@@ -80,7 +80,7 @@ const CategoriesSlider = ({ categorySlides }) => {
           href={`/categories/#${slide.sub_catname
             .replace(/[^\w\s-]/g, "")
             .replace(/\s+/g, "-")
-            .toLowerCase()}}`}
+            .toLowerCase()}`}
           className="group"
           key={slide.subcat_id}
         >

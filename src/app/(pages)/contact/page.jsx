@@ -1,25 +1,92 @@
 "use client";
 import React, { useState } from "react";
+import axios from "axios";
 import { BsFillClockFill } from "react-icons/bs";
 import { FaLocationArrow, FaPhone } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Image from "next/image";
+import Cara from "@/app/assets/images/cara-outlet.png"
 
 const Page = () => {
+  // Form states
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [preferredMethod, setPreferredMethod] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [responseMessage, setResponseMessage] = useState(null);
+  const [responseType, setResponseType] = useState(null);
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    // Prepare form data
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("prefered_comm", preferredMethod);
+    formData.append("message", message);
+
+    try {
+      const response = await axios.post(
+        "https://clients.echodigital.net/carabliss/add_contact.php",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+          timeout: 10000,
+        }
+      );
+
+      console.log("API Response:", response.data);
+      if (response.status === 200 || response.data?.code === 200) {
+        setResponseMessage("Message sent successfully!");
+        setResponseType("success");
+        toast.success("Message sent successfully!");
+      } else {
+        setResponseMessage("Failed to send message. Please try again.");
+        setResponseType("error");
+        toast.error("Failed to send message. Please try again.");
+      }
+
+      setTimeout(() => {
+        setName("");
+        setEmail("");
+        setPhone("");
+        setPreferredMethod("");
+        setMessage("");
+        setResponseMessage(null);
+        setResponseType(null);
+      }, 5000);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setResponseMessage("Something went wrong. Please try again later.");
+      setResponseType("error");
+      toast.error("Something went wrong. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="py-12">
+      <ToastContainer />
       <div className="mx-auto container px-5">
-        <div className="grid grid-cols-2 gap-5 mobile:grid-cols-1">
+        <div className="grid grid-cols-2 gap-5 mobile:grid-cols-1 tablet:grid-cols-1">
           <div className="mb-0">
             <div className="group w-full h-full">
-              <div className="relative h-full mobile:h-[500px]">
-                <img
-                  src="https://pagedone.io/asset/uploads/1696488602.png"
+              <div className="relative h-full mobile:h-[500px] bg-mahroon rounded-2xl">
+                <Image
+                  src={Cara}
                   alt="Contact Us"
-                  className="w-full h-full lg:rounded-l-2xl rounded-2xl bg-blend-multiply bg-indigo-700 object-cover"
+                  className="w-full h-full lg:rounded-l-2xl rounded-2xl bg-blend-multiply object-cover max-h-[80vh] tablet:max-h-[400px] opacity-60 "
                 />
-                <h1 className="page-heading text-white text-4xl font-bold leading-10 absolute top-11 left-11">
+                <h1 className="page-heading text-white leading-10 absolute top-11 left-11 tablet:left-5 table">
                   Contact us
                 </h1>
                 <div className="absolute bottom-0 w-full lg:p-11 p-5">
@@ -27,9 +94,9 @@ const Page = () => {
                     <p className="flex items-center mb-6">
                       <BsFillClockFill className="text-accent text-xl min-w-8 mobile:w-4" />
                       <h5 className="text-black text-base font-normal font-raleway leading-6 ml-5 mobile:text-sm">
-                        <strong> Mon - Thur: </strong> 05pm - 12AM
-                        <br />
-                        <strong>Fri - Sun:</strong>  05pm - 02AM
+                        <strong> Mon - Thur: </strong> 07pm - 03AM For Ramdan Only 
+                        {/* <br /> */}
+                        {/* <strong>Fri - Sun:</strong>  05pm - 02AM */}
                       </h5>
                     </p>
                     <a
@@ -65,89 +132,33 @@ const Page = () => {
               </div>
             </div>
           </div>
-
-          {/* Contact Form */}
           <div className="bg-black p-5 lg:p-11 lg:rounded-r-2xl rounded-2xl">
             <h2 className="text-accent font-kaisei h2 font-semibold mb-8 mobile:text-center">
               Send Us A Message
             </h2>
-            <input
-              type="text"
-              className="w-full py-4 text-white font-Raleway placeholder-gray-400 shadow-sm bg-transparent text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
-              placeholder="Name"
-            />
-            <input
-              type="email"
-              className="w-full py-4 text-white font-Raleway placeholder-gray-400 shadow-sm bg-transparent text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
-              placeholder="Email"
-            />
-            <input
-              type="text"
-              className="w-full py-4 text-white font-Raleway placeholder-gray-400 shadow-sm bg-transparent text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
-              placeholder="Phone"
-            />
-            <div className="mb-10">
-              <h4 className="text-gray-500 text-lg font-normal leading-7 mb-4">
-                Preferred method of communication
-              </h4>
-              <div className="flex">
-                <div className="flex items-center mr-11">
-                  <input
-                    id="radio-group-1"
-                    type="radio"
-                    name="radio-group"
-                    value="Email"
-                    checked={preferredMethod === "Email"}
-                    onChange={() => setPreferredMethod("Email")}
-                    className="hidden"
-                  />
-                  <label
-                    htmlFor="radio-group-1"
-                    className="flex items-center cursor-pointer font-Raleway text-gray-500 text-base font-normal leading-6"
-                  >
-                    <span
-                      className={`border border-gray-300 rounded-full mr-2 w-4 h-4 ${
-                        preferredMethod === "Email" ? "bg-mahroon" : ""
-                      }`}
-                    ></span>{" "}
-                    Email
-                  </label>
-                </div>
-                <div className="flex items-center">
-                  <input
-                    id="radio-group-2"
-                    type="radio"
-                    name="radio-group"
-                    value="Phone"
-                    checked={preferredMethod === "Phone"}
-                    onChange={() => setPreferredMethod("Phone")}
-                    className="hidden"
-                  />
-                  <label
-                    htmlFor="radio-group-2"
-                    className="flex items-center font-Raleway cursor-pointer text-gray-500 text-base font-normal leading-6"
-                  >
-                    <span
-                      className={`border border-gray-300 rounded-full mr-2 w-4 h-4 ${
-                        preferredMethod === "Phone" ? "bg-mahroon" : ""
-                      }`}
-                    ></span>{" "}
-                    Phone
-                  </label>
-                </div>
+            <form onSubmit={handleSubmit}>
+              <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 mb-5" placeholder="Name" required />
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 mb-5" placeholder="Email" required />
+              <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 mb-5" placeholder="Phone" required />
+              <h4 className="text-gray-500 text-lg mb-4">Preferred method of communication</h4>
+              <div className="flex mb-5">
+                <label className="flex items-center mr-5 cursor-pointer">
+                  <input type="radio" name="preferredMethod" value="Email" checked={preferredMethod === "Email"} onChange={() => setPreferredMethod("Email")} className="hidden" />
+                  <span className={`border rounded-full w-4 h-4 mr-2 ${preferredMethod === "Email" ? "bg-mahroon" : ""}`} /> Email
+                </label>
+                <label className="flex items-center cursor-pointer">
+                  <input type="radio" name="preferredMethod" value="Phone" checked={preferredMethod === "Phone"} onChange={() => setPreferredMethod("Phone")} className="hidden" />
+                  <span className={`border rounded-full w-4 h-4 mr-2 ${preferredMethod === "Phone" ? "bg-mahroon" : ""}`} /> Phone
+                </label>
               </div>
-            </div>
-            <input
-              type="text"
-              className="w-full py-4 text-white placeholder-gray-400 font-Raleway bg-transparent text-lg shadow-sm font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
-              placeholder="Message"
-            />
-            <button
-              className="bg-accent text-mahroon hover:bg-white w-full
-               font-kaisei font-bold text-lg py-4 px-14 rounded-[50px] hover:text-mahroon hover:bg-accent duration-300"
-            >
-              Send
-            </button>
+              <textarea value={message} onChange={(e) => setMessage(e.target.value)} className="w-full py-4 h-44 text-white bg-transparent text-lg border border-gray-200 rounded-2xl px-4 mb-5 tablet:h-24" placeholder="Message" required />
+              <button type="submit" className="bg-accent text-mahroon w-full font-bold text-lg py-4 rounded-full hover:bg-white duration-300">{loading ? "Sending..." : "Send"}</button>
+            </form>
+            {responseMessage && (
+              <p className={`mt-4 text-center text-lg ${responseType === "success" ? "text-green-500" : "text-red-500"}`}>
+                {responseMessage}
+              </p>
+            )}
           </div>
         </div>
       </div>

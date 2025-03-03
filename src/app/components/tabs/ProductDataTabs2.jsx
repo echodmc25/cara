@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import C1 from "@/app/assets/images/c1.png";
 import C2 from "@/app/assets/images/c2.png";
@@ -89,6 +89,31 @@ const ProductDataTabs2 = () => {
   const [activeTab, setActiveTab] = useState(0);
   const tabsRef = useRef(null);
 
+  const [columns, setColumns] = useState(4);
+
+  // Update the number of grid columns based on window width.
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width < 768) {
+        setColumns(2);
+      } else if (width < 1024) {
+        setColumns(3);
+      } else {
+        setColumns(4);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize(); // initial check
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+const items = tabsData[activeTab].content;
+
+const lastRowStart = Math.floor((items.length - 1) / columns) * columns;
+
+
   const handleMouseDown = (e) => {
     const container = tabsRef.current;
     if (!container) return;
@@ -153,11 +178,10 @@ const ProductDataTabs2 = () => {
             {tabsData[activeTab].content.map((item, index) => (
               <div
                 key={index}
-                className={`flex justify-start items-center gap-2 ${
-                  index < tabsData[activeTab].content.length
-                    ? "border-b"
-                    : "border-none"
-                } border-[#3f3f3f] py-4`}
+                className={`flex justify-start items-center gap-2 py-4 border-b border-[#3f3f3f] ${
+                  // Remove the bottom border for items in the last row.
+                  index >= lastRowStart ? "border-b-0" : ""
+                }`}
               >
                 {item.img && (
                   <Image

@@ -4,11 +4,12 @@ import FixedCategoryList from "@/app/components/stickyCategories/FixedCategoryLi
 import TabsPopup from "@/app/components/popups/TabsPopup";
 
 import CardsSectionsMain from "@/app/components/section/CardsSectionsMain";
+import CardsSectionsTesting from "@/app/components/section/CardSectionTesting";
 
 const getSubCategoriesWithProducts = async (cat_id) => {
   try {
     const res = await fetch(
-      `https://clients.echodigital.net/carabliss/get_newProduct.php`,
+      `https://clients.echodigital.net/carabliss/get_newProductLatest.php`,
       { cache: "no-store" } // Always fetch fresh data
     );
 
@@ -58,7 +59,7 @@ export default async function Menu({ params }) {
       <div className="container relative">
         <StckyCategoriesList categories={sortedCategoriesList} />
         <div className="relative">
-          <CardsSectionsMain
+          <CardsSectionsTesting
             SubCategoriesAndProducts={SubCategoriesAndProducts}
           />
         </div>

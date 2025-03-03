@@ -84,7 +84,7 @@ const BannerSlider = ({ slides }) => {
           <div className="absolute pt-10 w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <div className="flex flex-col justify-center items-center gap-12 px-5">
               <div className="max-w-[700px]">
-                <h3 className="font-arizonia text-[36px] text-white text-center">
+                <h3 className="font-bodoni text-[36px] text-white text-center">
                   {slide.subtitle}
                 </h3>
                 <h2 className="text-white tracking-widest font-kaisei page-heading font-bold text-center uppercase">
