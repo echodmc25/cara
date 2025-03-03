@@ -31,7 +31,7 @@ const DoubleProductCard = ({product, catTwo, catOne}) => {
                                             {catOne}
                                           </h2>
                                           <p className='my-1 text-white/70 font-ropa text-sm'>
-                                            {product.prod_descDoubleMain}
+                                            {product.prod_descMain}
                                           </p>
                                           <p className="font-Raleway text-lg font-bold">
                                             Rs. {product.prod_price}
