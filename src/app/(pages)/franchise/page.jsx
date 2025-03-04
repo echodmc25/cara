@@ -5,39 +5,37 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Page = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    contact: "",
-    city: "",
-    location: "",
-    start_date: "",
-    why_carablis: "",
-    previous_experience: "",
-    budget: "",
-    add_question: "",
-    investment_plan: "",
-    franchise_type: "",
-  });
-
+  // Form states
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [contact, setContact] = useState("");
+  const [city, setCity] = useState("");
+  const [whyCarabliss, setWhyCarabliss] = useState("");
+  const [previousExperience, setPreviousExperience] = useState("");
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState(null);
   const [responseType, setResponseType] = useState(null);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
+    // Prepare form data
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("contact", contact);
+    formData.append("city", city);
+    formData.append("why_carablis", whyCarabliss);
+    formData.append("previous_experience", previousExperience);
+
     try {
       const response = await axios.post(
         "https://clients.echodigital.net/carabliss/add_franchise.php",
-        { ...formData, timestamp: new Date().toISOString() },
+        formData,
         {
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "multipart/form-data" },
           timeout: 10000,
         }
       );
@@ -54,20 +52,12 @@ const Page = () => {
       }
 
       setTimeout(() => {
-        setFormData({
-          name: "",
-          email: "",
-          contact: "",
-          city: "",
-          location: "",
-          start_date: "",
-          why_carablis: "",
-          previous_experience: "",
-          budget: "",
-          add_question: "",
-          investment_plan: "",
-          franchise_type: "",
-        });
+        setName("");
+        setEmail("");
+        setContact("");
+        setCity("");
+        setWhyCarabliss("");
+        setPreviousExperience("");
         setResponseMessage(null);
         setResponseType(null);
       }, 5000);
@@ -94,39 +84,24 @@ const Page = () => {
             <h2 className="text-accent font-kaisei h2 font-semibold leading-10 mb-8 mobile:text-center">
               Application Form
             </h2>
-            <form onSubmit={handleSubmit}>
-              <div className="grid grid-cols-2 gap-5 mobile:grid-cols-1">
-                <div>
-                  <label className="text-white block mb-2">Full Name</label>
-                  <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4" required />
-                </div>
-                <div>
-                  <label className="text-white block mb-2">Email Address</label>
-                  <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4" required />
-                </div>
-                <div>
-                  <label className="text-white block mb-2">Contact Number</label>
-                  <input type="text" name="contact" value={formData.contact} onChange={handleChange} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4" required />
-                </div>
-                <div>
-                  <label className="text-white block mb-2">City of Interest</label>
-                  <input type="text" name="city" value={formData.city} onChange={handleChange} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4" required />
-                </div>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-5 mobile:gap-3">
+              <div className="flex justify-between items-center gap-5 mobile:flex-col mobile:gap-3">
+              <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 " placeholder="Full Name" required />
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 " placeholder="Email Address" required />
               </div>
-              <label className="text-white block mt-5 mb-2">Why Carabliss?</label>
-              <textarea name="why_carablis" value={formData.why_carablis} onChange={handleChange} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4" rows="2" required />
-              <label className="text-white block mt-5 mb-2">Previous Business Experience</label>
-              <textarea name="previous_experience" value={formData.previous_experience} onChange={handleChange} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4" rows="2" required />
-              <label className="text-white block mt-5 mb-2">Investment Budget</label>
-              <input type="text" name="budget" value={formData.budget} onChange={handleChange} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4" required />
-              <label className="text-white block mt-5 mb-2">Investment Plan</label>
-              <input type="text" name="investment_plan" value={formData.investment_plan} onChange={handleChange} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4" required />
-              <label className="text-white block mt-5 mb-2">Franchise Type</label>
-              <input type="text" name="franchise_type" value={formData.franchise_type} onChange={handleChange} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4" required />
-              <button type="submit" className="bg-accent text-mahroon hover:bg-white w-full font-kaisei font-bold text-lg py-4 px-14 rounded-full hover:text-mahroon hover:bg-accent duration-300 mt-5">{loading ? "Submitting..." : "Submit"}</button>
+              <div className="flex justify-between items-center gap-5 mobile:flex-col mobile:gap-3">
+              <input type="text" value={contact} onChange={(e) => setContact(e.target.value)} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 " placeholder="Contact Number" required />
+              <input type="text" value={city} onChange={(e) => setCity(e.target.value)} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 " placeholder="City of Interest" required />
+              </div>
+              <textarea value={whyCarabliss} onChange={(e) => setWhyCarabliss(e.target.value)} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 " placeholder="Why Carabliss?" required />
+              <textarea value={previousExperience} onChange={(e) => setPreviousExperience(e.target.value)} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 " placeholder="Previous Business Experience" required />
+              <button type="submit" className="bg-accent text-mahroon w-full font-bold text-lg py-4 rounded-full hover:bg-white duration-300">{loading ? "Submitting..." : "Submit"}</button>
             </form>
-            {responseMessage && <p className={`mt-4 text-center text-lg ${responseType === "success" ? "text-green-500" : "text-red-500"}`}>{responseMessage}</p>}
-            <p className="p text-accent text-center mt-5">*Once you submit this form, our franchise team will review your application and get in touch within 48 hours to discuss the next steps.</p>
+            {responseMessage && (
+              <p className={`mt-4 text-center text-lg ${responseType === "success" ? "text-green-500" : "text-red-500"}`}>
+                {responseMessage}
+              </p>
+            )}
           </div>
         </div>
       </div>

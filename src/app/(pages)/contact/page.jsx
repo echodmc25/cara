@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { BsFillClockFill } from "react-icons/bs";
 import { FaLocationArrow, FaPhone } from "react-icons/fa";
-import { IoIosMail } from "react-icons/io";
+import { IoIosMail, IoMdPin } from "react-icons/io";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
@@ -94,18 +94,18 @@ const Page = () => {
                     <p className="flex items-center mb-6">
                       <BsFillClockFill className="text-accent text-xl min-w-8 mobile:w-4" />
                       <h5 className="text-black text-base font-normal font-raleway leading-6 ml-5 mobile:text-sm">
-                        <strong> Mon - Thur: </strong> 07pm - 03AM For Ramdan Only 
+                        <strong> Mon - Sun: </strong> 07pm - 03AM For Ramdan Only 
                         {/* <br /> */}
                         {/* <strong>Fri - Sun:</strong>  05pm - 02AM */}
                       </h5>
                     </p>
                     <a
-                      href="tel:0304-111-8080"
+                      href="tel:0322-8291815"
                       className="flex items-center mb-6"
                     >
                       <FaPhone className="text-accent text-xl min-w-8 mobile:w-4" />
                       <h5 className="text-black text-base font-normal font-raleway leading-6 ml-5 mobile:text-sm">
-                        0304-111-8080
+                        0322-8291815
                       </h5>
                     </a>
                     <a
@@ -121,8 +121,8 @@ const Page = () => {
                       href="https://maps.app.goo.gl/8XpsTjTs4aX8ZRzx7"
                       className="flex items-center mb-6"
                     >
-                      <FaLocationArrow className="text-accent text-xl min-w-8 mobile:w-4" />
-                      <p className="text-black text-base font-normal font-raleway leading-6 ml-5 mobile:text-sm">
+                      <IoMdPin className="text-mahroon text-3xl min-w-8 mobile:w-4" />
+                      <p className=" text-blue-700 text-base font-normal font-raleway leading-6 ml-5 mobile:text-sm">
                         10/C, Ittehad Commercial, Main Khayaban-e-Nishat, Phase
                         6, DHA, Karachi
                       </p>
