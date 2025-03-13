@@ -12,7 +12,7 @@ import FixedCategoryListWithImage from "@/app/components/stickyCategories/FixedC
 const getSingleProduct = async (pro_id) => {
   try {
     const res = await fetch(
-      `https://clients.echodigital.net/carabliss/get_singleproduct.php?prod_id=${pro_id}`,
+      `https://admin.carabliss.pk/get_singleproduct.php?prod_id=${pro_id}`,
       { cache: "no-store" } // Always fetch fresh data
     );
 
@@ -28,7 +28,7 @@ const getSingleProduct = async (pro_id) => {
 const getCategories = async () => {
   try {
     const res = await fetch(
-      "https://clients.echodigital.net/carabliss/get_subcat5.php",
+      "https://admin.carabliss.pk/get_subcat5.php",
       {
         cache: "no-store", // Ensures fresh data on every request
       }

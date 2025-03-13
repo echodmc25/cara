@@ -53,10 +53,10 @@ const CategoriesSlider = ({ categorySlides }) => {
   const categorySettings = {
     dots: false,
     infinite: true,
-    speed: 1000,
+    speed: 1500,
     slidesToShow: isMobile ? 1 : isTablet ? 1 : 3,
     slidesToScroll: 1,
-    autoplay: false,
+    autoplay: true,
     centerMode: !isMobile, // Ensures the middle slides are prominent
     centerPadding: isTablet ? "25%" : "14%", // Adjusts visibility of side slides
     autoplaySpeed: 5000,

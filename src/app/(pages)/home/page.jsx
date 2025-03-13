@@ -21,7 +21,7 @@ import BannerSlider from "@/app/components/slides/BannerSlider";
 const getCategories = async () => {
   try {
     const res = await fetch(
-      "https://clients.echodigital.net/carabliss/get_subcat5.php",
+      "https://admin.carabliss.pk/get_subcat5.php",
       {
         cache: "no-store", // Ensures fresh data on every request
       }

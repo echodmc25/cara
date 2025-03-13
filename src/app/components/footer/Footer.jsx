@@ -147,8 +147,8 @@ const Footer = () => {
       <div className="max-w-[1500px] mx-auto">
         <div className="flex justify-between items-center mobile:flex-col mobile:justify-center gap-5">
           <p className="font-ropa text-white text-base text-center">
-            Copyright © 2025 Carabliss. All rights reserved | Powered by ECHO
-            Digital
+            Copyright © 2025 Carabliss. All rights reserved | Powered by <a href="https://echodmc.com/" target="_blank"> ECHO
+            Digital </a>
           </p>
           <Image
             src={Payment}

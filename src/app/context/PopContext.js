@@ -6,10 +6,12 @@ const PopupContext = createContext();
 
 // Context Provider
 export const PopupProvider = ({ children }) => {
+
+  const [productId, setProductId] = useState("")
   const [listOpen, setListOpen] = useState(false);
 
   return (
-    <PopupContext.Provider value={{ listOpen, setListOpen }}>
+    <PopupContext.Provider value={{ listOpen, setListOpen, productId, setProductId }}>
       {children}
     </PopupContext.Provider>
   );

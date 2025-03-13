@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import Banner from "@/app/assets/images/about.jpg";
-import Baker1 from "@/app/assets/images/bakker1.jpg";
-import Baker2 from "@/app/assets/images/bakker2.jpg";
+import Baker1 from "@/app/assets/images/Tanveer.jpg";
+import Baker2 from "@/app/assets/images/cara-inner.jpg";
 
 const AboutUs = () => {
   // State for toggling content visibility
@@ -26,7 +26,7 @@ const AboutUs = () => {
       </div>
 
       {/* Section 1 - Tanveer's Journey */}
-      <section className="container mx-auto px-5 py-16 flex lg:flex-row items-center gap-12 mobile:flex-col-reverse">
+      <section className="container mx-auto px-5 py-16 flex lg:flex-row items-center gap-12 mobile:gap-5 mobile:flex-col-reverse">
         <div className="w-1/2 mobile:w-full">
           <h2 className="h2 text-accent mb-4">The Journey of Tanveer Yusuf</h2>
 
@@ -57,26 +57,26 @@ const AboutUs = () => {
             {showFullTanveer ? "Show Less" : "Show More"}
           </button>
         </div>
-        <div className="w-1/2 mobile:w-full">
+        <div className="w-1/2 mobile:w-full ">
           <Image
             src={Baker1}
             alt="Tanveer Yusuf"
             width={600}
             height={400}
-            className="rounded-lg shadow-lg mobile:w-full"
+            className="rounded-lg shadow-lg aspect-video object-cover mobile:w-full"
           />
         </div>
       </section>
 
       {/* Section 2 - Carabliss Vision */}
-      <section className="container mx-auto px-5 pb-16 pt-8 flex lg:flex-row-reverse items-center gap-12 mobile:flex-col">
+      <section className="container mx-auto px-5 tablet:pt-0 pb-16 pt-8 flex lg:flex-row-reverse items-center mobile:gap-5 gap-12 mobile:flex-col">
         <div className="w-1/2 mobile:w-full">
           <Image
             src={Baker2}
             alt="Carabliss Desserts"
             width={600}
             height={400}
-            className="rounded-lg shadow-lg mobile:w-full"
+            className="rounded-lg shadow-lg aspect-video object-cover mobile:w-full"
           />
         </div>
         <div className="w-1/2 mobile:w-full">

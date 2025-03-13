@@ -4,7 +4,7 @@ import Cake from "@/app/assets/images/cake-2.png";
 const getCategoriesList = async () => {
   try {
     const res = await fetch(
-      "https://clients.echodigital.net/carabliss/get_categoriesnew5.php",
+      "https://admin.carabliss.pk/get_categoriesnew5.php",
       {
         cache: "no-store", // Ensures fresh data on every request
       }

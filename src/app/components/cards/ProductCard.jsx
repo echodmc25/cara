@@ -7,24 +7,24 @@ import { FaPlus } from "react-icons/fa6";
 import { usePopup } from "@/app/context/PopContext";
 
 const ProductCard = ({ product, servings = false }) => {
-  const { setListOpen } = usePopup();
+  const { setListOpen, setProductId } = usePopup();
 
-  const [listed, setListed] = useState(false);
+  // const [listed, setListed] = useState(false);
 
-  const addToListed = () => {
-    setListed(!listed);
-  };
+  const productToppings = (id) => {
+    setProductId(id)
+    setListOpen(true)
+  }
 
   const [currentSlide, setCurrentSlide] = useState(0);
-  const slides = product?.product_images || []; // Ensure product_images exists
+  const slides = product?.product_images || []; 
 
-  // Prevent automatic slide change when there's only one media
   useEffect(() => {
     if (slides.length <= 1) return;
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000); // Change slide every 5 seconds
+    }, 5000); 
 
     return () => clearInterval(interval);
   }, [slides.length]);
@@ -58,20 +58,8 @@ const ProductCard = ({ product, servings = false }) => {
 
   return (
     <div className="relative group z-0">
-      {/* {listed ? (
-        <FaHeart
-          onClick={addToListed}
-          className="absolute right-4 top-4 text-[25px] text-mahroon z-10 cursor-pointer"
-        />
-      ) : (
-        <FaRegHeart
-          onClick={addToListed}
-          className="absolute right-4 top-4 text-[25px] z-10 cursor-pointer text-mahroon"
-        />
-      )} */}
-
       <button
-        onClick={() => setListOpen(true)}
+        onClick={()=>productToppings(product?.prod_id)}
         className="bg-[#00000090] text-accent px-2 py-1 font-ropa font-medium text-lg flex gap-2 items-center absolute w-fit right-0 top-0 z-10"
       >
         <FaPlus className="text-accent text-lg" />
@@ -79,33 +67,6 @@ const ProductCard = ({ product, servings = false }) => {
       </button>
 
       <div>
-        {/* <div className="relative w-full overflow-hidden aspect-[5/6]">
-          {product.product_images.map((slide, index) => (
-            <div
-              key={index}
-              className={`absolute inset-0 transition-transform duration-1000 ease-in-out ${
-                index === currentSlide
-                  ? "translate-x-0"
-                  : index < currentSlide
-                  ? "-translate-x-full"
-                  : "translate-x-full"
-              }`}
-            >
-              {renderSlide(slide, index)}
-            </div>
-          ))}
-          <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
-            {slides.map((_, index) => (
-              <div
-                key={index}
-                className={`w-3 h-3 rounded-full cursor-pointer ${
-                  index === currentSlide ? "bg-mahroon" : "bg-accent"
-                }`}
-                onClick={() => setCurrentSlide(index)}
-              ></div>
-            ))}
-          </div>
-        </div> */}
         <div className="relative w-full overflow-hidden aspect-[5/6]">
           {slides.length > 0 ? (
             slides.map((slide, index) => (

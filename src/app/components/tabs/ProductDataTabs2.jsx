@@ -1,97 +1,24 @@
-"use client";
-import Image from "next/image";
-import React, { useState, useRef, useEffect } from "react";
-import { FaMinus, FaPlus } from "react-icons/fa6";
-import C1 from "@/app/assets/images/c1.png";
-import C2 from "@/app/assets/images/c2.png";
-import C3 from "@/app/assets/images/c3.png";
-import Geleto1 from "@/app/assets/images/geleto.png";
-import BelgianChocolate from "@/app/assets/images/Belgian Chocolate.png";
-import MaltBrownie from "@/app/assets/images/Malt Brownie.png";
-import FrenchVanilla from "@/app/assets/images/French Vanilla.png";
-import Coconut from "@/app/assets/images/Coconut.png";
-import FerreroRocher from "@/app/assets/images/Ferrero Rocher.png";
-import Snickers from "@/app/assets/images/Snickers.png";
-import StrawberryYogurt from "@/app/assets/images/Strawberry Yogurt.png";
-import CookiesAndCream from "@/app/assets/images/Cookies & Cream.png";
-import Lotus from "@/app/assets/images/Lotus.png";
-import SaltedCaramel from "@/app/assets/images/Salted caramel.png";
-import WhiteChocolateRaspberry from "@/app/assets/images/White chocolate with raspberry.png";
-import Berrylicious from "@/app/assets/images/Berrylicious.png";
-import Tiramisu from "@/app/assets/images/Tiramisu.png";
-import Pistachio from "@/app/assets/images/Pista.png";
-import BubbleGum from "@/app/assets/images/Bubble gum.png";
-import CottonCandy from "@/app/assets/images/Cotton Candy.png";
+"use client"
 
-const ProductDataTabs2 = () => {
-  const tabsData = [
-    {
-      title: "Gelatos",
-      image: C3,
-      content: [
-        { name: "Belgian Chocolate", img: BelgianChocolate },
-        { name: "Malt Brownie", img: MaltBrownie },
-        { name: "French Vanilla", img: FrenchVanilla },
-        { name: "Coconut", img: Coconut },
-        { name: "Ferrero Rocher", img: FerreroRocher },
-        { name: "Snickers", img: Snickers },
-        { name: "Strawberry Yogurt", img: StrawberryYogurt },
-        { name: "Cookies & Cream", img: CookiesAndCream },
-        { name: "Lotus", img: Lotus },
-        { name: "Salted Caramel", img: SaltedCaramel },
-        {
-          name: "White Chocolate with Raspberry",
-          img: WhiteChocolateRaspberry,
-        },
-        { name: "Berrylicious", img: Berrylicious },
-        { name: "Tiramisu", img: Tiramisu },
-        { name: "Pistachio", img: Pistachio },
-        { name: "Bubble Gum", img: BubbleGum },
-        { name: "Cotton Candy", img: CottonCandy },
-      ],
-    },
-    {
-      title: "Toppings",
-      image: C1,
-      content: [
-        { name: "Callebaut Chocolate Chip" },
-        { name: "Callebaut White Chocolate Chip" },
-        { name: "Sprinkles" },
-        { name: "M&Ms" },
-        { name: "Brownie" },
-        { name: "Oreo Crumbs" },
-        { name: "Roasted Pistachios" },
-        { name: "Roasted Peanuts" },
-        { name: "Ajwa Dates" },
-        { name: "Coconut Shavings" },
-      ],
-    },
-    {
-      title: "Sauces",
-      image: C2,
-      content: [
-        { name: "Hot Dark Lindt Chocolate" },
-        { name: "Hot Milk Lindt Chocolate" },
-        { name: "Hot White Lindt Chocolate" },
-        { name: "Dark Lindt Chocolate" },
-        { name: "Milk Lindt Chocolate" },
-        { name: "White Lindt Chocolate" },
-        { name: "Caramel" },
-        { name: "Lotus" },
-        { name: "Hot Fudge" },
-        { name: "Nutella" },
-        { name: "Strawberry" },
-        { name: "Pistachio" },
-      ],
-    },
-  ];
+import React, { useState, useRef, useEffect } from "react";
+import Image from "next/image";
+
+const ProductDataTabs2 = ({ flavorCategories }) => {
+  if (!flavorCategories || flavorCategories.length === 0) return null;
+
+  const tabsData = flavorCategories.map((category) => ({
+    title: category.category_name,
+    image: category.category_image,
+    content: category.flavors.map((flavor) => ({
+      name: flavor.flavor_name,
+      img: flavor.flavor_image || null,
+    })),
+  }));
 
   const [activeTab, setActiveTab] = useState(0);
   const tabsRef = useRef(null);
-
   const [columns, setColumns] = useState(4);
 
-  // Update the number of grid columns based on window width.
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
@@ -105,14 +32,12 @@ const ProductDataTabs2 = () => {
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // initial check
+    handleResize(); // Initial check
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, []);
 
-const items = tabsData[activeTab].content;
-
-const lastRowStart = Math.floor((items.length - 1) / columns) * columns;
-
+  const items = tabsData[activeTab].content;
+  const lastRowStart = Math.floor((items.length - 1) / columns) * columns;
 
   const handleMouseDown = (e) => {
     const container = tabsRef.current;
@@ -179,9 +104,8 @@ const lastRowStart = Math.floor((items.length - 1) / columns) * columns;
               <div
                 key={index}
                 className={`flex justify-start items-center gap-2 py-4 border-b border-[#3f3f3f] ${
-                  // Remove the bottom border for items in the last row.
                   index >= lastRowStart ? "border-b-0" : ""
-                }`}
+                }`}
               >
                 {item.img && (
                   <Image

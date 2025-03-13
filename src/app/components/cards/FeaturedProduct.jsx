@@ -1,16 +1,12 @@
-
-
-
 import React from "react";
 import ProductDataTabs2 from "../tabs/ProductDataTabs2";
 import Image from "next/image";
 
 const FeaturedProduct = ({ product }) => {
-  if (!product) return null; // Ensure product data exists
+  if (!product) return null;
 
   return (
     <>
-   
       <div className="flex justify-between items-center border-t border-accent pt-3">
         <div>
           <h2 className="font-kaisei text-[28px] text-accent">
@@ -27,10 +23,9 @@ const FeaturedProduct = ({ product }) => {
               Servings:
             </h3>
             <div className="flex gap-2 bg-mahroon rounded-3xl px-2 py-1 mobile:p-1">
-            
               <p className="text-[14px] text-accent font-bold font-ropa">
-                                              {product?.prod_serving}
-                                              </p>
+                {product?.prod_serving}
+              </p>
             </div>
           </div>
         </div>

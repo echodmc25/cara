@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 
-const StckyCategoriesList = ({ categories }) => {
+const StckyCategoriesList = ({ categories, activeCategory }) => {
   const pathname = usePathname(); // Get current path
   const categoryRefs = useRef({}); // Store category refs
   const draggableRef = useRef(null);
@@ -104,8 +104,12 @@ const StckyCategoriesList = ({ categories }) => {
               <button
                 key={category.subcat_id}
                 className={`py-3 px-6 mobile:px-4 mobile:py-2 mobile:text-sm rounded-3xl border ${
-                  isActive
-                    ? "border-mahroon bg-mahroon text-white"
+                  (category.sub_catname
+                .trim()
+                .replace(/[^\w\s-]/g, "")
+                .replace(/\s+/g, "-") 
+                .toLowerCase() == activeCategory) ?
+                     "border-mahroon bg-mahroon text-white"
                     : "border-accent text-accent"
                 } font-ropa text-base min-w-fit`}
                 onClick={(e) => {

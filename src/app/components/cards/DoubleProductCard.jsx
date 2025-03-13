@@ -3,6 +3,7 @@ import AddOnButton from '../button/AddOnButton'
 import Image from 'next/image'
 
 const DoubleProductCard = ({product, catTwo, catOne}) => {
+  
   return (
     <div
                                   className="flex justify-between items-stretch gap-6 mobile:gap-3 mb-12 mt-5 mobile:flex-col mobile:mb-6"
@@ -74,7 +75,7 @@ const DoubleProductCard = ({product, catTwo, catOne}) => {
                                       </div>
                                     </div>
                                     <div className="">
-                                      <AddOnButton />
+                                      <AddOnButton productId={product?.prod_id}/>
                                     </div>
                                   </div>
                                 </div>
