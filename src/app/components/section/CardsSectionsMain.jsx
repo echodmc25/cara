@@ -1,18 +1,58 @@
 "use client";
+
 import React, { useEffect, useRef } from "react";
 import ProductCard from "@/app/components/cards/ProductCard";
 import Image from "next/image";
 
-import Ice1 from "@/app/assets/images/Ice2.png";
-import Ice2 from "@/app/assets/images/Pr.jpg";
-import { FaUserAlt } from "react-icons/fa";
-import { useRouter } from "next/navigation";
-import ProductDataTabs2 from "@/app/components/tabs/ProductDataTabs2";
-import AddOnButton from "@/app/components/button/AddOnButton";
 import DoubleProductCard from "../cards/DoubleProductCard";
 import FeaturedProduct from "../cards/FeaturedProduct";
 
-const CardsSectionsMain = ({ SubCategoriesAndProducts }) => {
+const CardsSectionsTesting = ({
+  SubCategoriesAndProducts,
+  setActiveCategory,
+}) => {
+  const categoryRefs = useRef({});
+
+  useEffect(() => {
+    const initialCategory = window.location.hash.replace("#", "").toLowerCase();
+
+    if (initialCategory && categoryRefs.current[initialCategory]) {
+      setActiveCategory(initialCategory);
+      categoryRefs.current[initialCategory].scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+
+    const handleScroll = () => {
+      const middleScreen = window.innerHeight / 2; // Middle of the viewport
+      let closestCategory = null;
+      let closestDistance = Infinity;
+
+      Object.keys(categoryRefs.current).forEach((subCatId) => {
+        const categoryElement = categoryRefs.current[subCatId];
+        if (categoryElement) {
+          const rect = categoryElement.getBoundingClientRect();
+          const categoryMiddle = rect.top + rect.height / 2;
+          const distance = Math.abs(categoryMiddle - middleScreen);
+
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestCategory = subCatId;
+          }
+        }
+      });
+
+      if (closestCategory) {
+        setActiveCategory(closestCategory);
+        window.history.replaceState(null, "", `#${closestCategory}`); // ✅ Update URL hash on scroll
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [setActiveCategory]);
+
   const sortedCategoriesList = SubCategoriesAndProducts.sort(
     (a, b) => a.cat_position - b.cat_position
   );
@@ -22,316 +62,95 @@ const CardsSectionsMain = ({ SubCategoriesAndProducts }) => {
       {sortedCategoriesList?.length > 0 &&
         sortedCategoriesList.map((categoryObj, catIndex) => (
           <React.Fragment key={categoryObj?.cat_id}>
-            {categoryObj?.cat_id == 7 ? (
-              <div className="mb-12" key={categoryObj?.cat_id}>
-                <div className="flex justify-center items-center overflow-hidden h-40 mobile:h-24 relative mb-6 mt-20  mobile:mt-0 ">
-                  <div className="absolute left-0 top-0 w-full h-40 mobile:h-24 z-0 bg-background">
-                    <Image
-                      src={Ice1}
-                      alt={"ice cream"}
-                      width="1024"
-                      height="1024"
-                      className="w-full object-cover h-full object-center opacity-30"
-                    />
-                  </div>
-                  <h1 className="font-bodoni text-[48px] mobile:text-[28px] text-center text-accent text-primary relative z-10">
-                    Unbowlievably In Love With Gelato!
-                  </h1>
-                </div>
-                {/* <div
-                  className="flex justify-between items-center border-t border-accent pt-3"
-                  id="gelato-bowls"
-                >
-                  <div>
-                    <h2 className="font-kaisei text-[28px] text-accent">
-                      Make your own bowl
-                    </h2>
-                    <p className="text-white/40 p">
-                      (3 scoops + 2 sauces + 2 toppings)
-                    </p>
-                  </div>
-                  <div>
-                    <h2 className="font-Raleway text-xl font-bold text-right">
-                      Rs. 1950
-                    </h2>
-                    <div className="flex gap-2  items-center justify-end mobile:gap-2 mt-1">
-                      <h3 className="text-white/50 text-md mobile:text-base font-ropa">
-                        Servings:
-                      </h3>
-                      <div className="flex gap-2 bg-mahroon rounded-3xl px-2 py-1 mobile:p-1">
-                        <FaUserAlt className="text-accent text-[10px] " />
-                        <FaUserAlt className="text-accent text-[10px] " />
-                        <FaUserAlt className="text-accent text-[10px] " />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className=" mt-8">
+            <div key={categoryObj.cat_id}>
+              {/* Category Heading */}
+              <div
+                className={`flex justify-center items-center overflow-hidden h-40 mobile:h-24 relative mb-6 ${
+                  catIndex <= 1 ? "mt-10" : "mt-20"
+                } mobile:mt-10`}
+              >
+                <div className="absolute left-0 top-0 w-full h-40 mobile:h-24 z-0 bg-background">
                   <Image
-                    src={Ice2}
-                    alt="icen cream"
-                    height={2000}
-                    width={2000}
-                    className="aspect-video object-cover"
+                    src={categoryObj.cat_image}
+                    alt={categoryObj.cat_name}
+                    width="1024"
+                    height="1024"
+                    className="w-full object-cover h-full object-center opacity-30"
                   />
                 </div>
-                <div className="tabs">
-                  <ProductDataTabs2 />
-                </div> */}
-                <FeaturedProduct />
+                <h1 className="font-bodoni text-[48px] mobile:text-[28px] text-center text-accent text-primary relative z-10">
+                  {categoryObj.cat_name}
+                </h1>
               </div>
-            ) : (
-              <div key={categoryObj.cat_id}>
-                {/* Main Category Name */}
 
-                <div
-                  className={`flex justify-center items-center overflow-hidden h-40 mobile:h-24 relative mb-6 ${
-                    categoryObj?.cat_id <= 1 ? "mt-10" : "mt-20"
-                  } mobile:mt-6   `}
-                >
-                  <div className="absolute left-0 top-0 w-full h-40 mobile:h-24 z-0 bg-background">
-                    <Image
-                      src={categoryObj.cat_image}
-                      alt={categoryObj.cat_name}
-                      width="1024"
-                      height="1024"
-                      className="w-full object-cover h-full object-center opacity-30"
-                    />
-                  </div>
-                  <h1 className="font-bodoni text-[48px] mobile:text-[28px] text-center text-accent text-primary relative z-10">
-                    {categoryObj.cat_name}
-                  </h1>
-                </div>
+              {/* Subcategories */}
+              {categoryObj.sub_categories?.length > 0 &&
+                [...categoryObj.sub_categories]
+                  .sort((a, b) => a.position - b.position)
+                  .map((subCategory) => {
+                    const subCategoryId = subCategory?.sub_catname
+                      ? subCategory.sub_catname
+                          .replace(/[^\w\s-]/g, "")
+                          .replace(/\s+/g, "-")
+                          .toLowerCase()
+                      : "default-id";
 
-                {/* Now, map over subcategories */}
-                {categoryObj.sub_categories?.length > 0 &&
-                  [...categoryObj.sub_categories]
-                    .sort((a, b) => a.position - b.position)
-                    .map((subCategory, index) => (
+                    return (
                       <div
                         key={subCategory?.subcat_id}
-                        id={
-                          subCategory?.sub_catname
-                            ? subCategory.sub_catname
-                                .replace(/[^\w\s-]/g, "")
-                                .replace(/\s+/g, "-")
-                                .toLowerCase()
-                            : "default-id"
-                        }
+                        id={subCategoryId}
+                        ref={(el) => (categoryRefs.current[subCategoryId] = el)}
                       >
-                        {/* Subcategory Name */}
-                        <h2 className="h2 text-accent pt-3 border-t border-accent mt-6">
-                          {subCategory?.sub_catname}
-                        </h2>
-                        {subCategory?.sub_catname == "Waffles" ? (
+                        {subCategory.layout !== "single" && (
+                          <h2 className="h2 text-accent pt-3 border-t border-accent mt-6">
+                            {subCategory?.sub_catname}
+                          </h2>
+                        )}
+
+                        {subCategory?.products?.length > 0 ? (
                           <>
-                            {subCategory?.products?.length > 0 ? (
-                              subCategory.products.map((product) => (
-                                // <div
-                                //   className="flex justify-between items-stretch gap-6 mb-12 mt-5 mobile:flex-col "
-                                //   key={product.prod_id}
-                                // >
-                                //   <div className="max-w-1/2 w-full p-aspect">
-                                //     <Image
-                                //       src={product?.product_images?.[0]?.src}
-                                //       alt={product.prod_name}
-                                //       height={1024}
-                                //       width={1024}
-                                //       className="w-full h-full object-cover"
-                                //     />
-                                //   </div>
-                                //   <div className="w-full min-h-full max-w-1/2 flex flex-col justify-between items-start">
-                                //     <div className=" w-full">
-                                //       <h3 className="h4 mb-3 text-accent">
-                                //         {product.prod_name}
-                                //       </h3>
-                                //       <p className="font-ropa text-base text-white/50  leading-5">
-                                //         {product?.prod_desc}
-                                //       </p>
-                                //       <div className="flex justify-between items-start gap-5 my-7">
-                                //         <div>
-                                //           <h2 className="h4  text-accent">
-                                //             Single Stack
-                                //           </h2>
-                                //           <p className="font-Raleway text-lg font-bold">
-                                //             Rs. {product.prod_price}
-                                //           </p>
-                                //           <div className="flex gap-2  items-center justify-start mobile:gap-2 mt-1">
-                                //             <h3 className="text-white/50 text-md mobile:text-base font-ropa">
-                                //               Servings:
-                                //             </h3>
-                                //             <div className="flex gap-2 bg-mahroon rounded-3xl px-2 py-1 mobile:p-1">
-                                //               {/* <FaUserAlt className="text-accent text-[10px] " />
-                                //             <FaUserAlt className="text-accent text-[10px] " /> */}
-                                //               {/* {Array.from(
-                                //                 {
-                                //                   length: product?.prod_serving,
-                                //                 },
-                                //                 (_, i) => (
-                                //                   <FaUserAlt
-                                //                     key={i}
-                                //                     className="text-accent text-[10px] "
-                                //                   />
-                                //                 )
-                                //               )} */}
-                                //               <p className="text-[14px] text-accent font-bold font-ropa">
-                                //               {product?.prod_serving}
-                                //               </p>
-                                //             </div>
-                                //           </div>
-                                //         </div>
-                                //         <div>
-                                //           <h2 className="h4 text-accent">
-                                //             Double Stack
-                                //           </h2>
-                                //           <p className="font-Raleway text-lg font-bold">
-                                //             Rs. {product.prod_doublePrice}
-                                //           </p>
-                                //           <div className="flex gap-2  items-center justify-start mobile:gap-2 mt-1">
-                                //             <h3 className="text-white/50 text-md mobile:text-base font-ropa">
-                                //               Servings:
-                                //             </h3>
-                                //             <div className="flex gap-2 bg-mahroon rounded-3xl px-2 py-1 mobile:p-1">
-                                //               {/* <FaUserAlt className="text-accent text-[10px] " />
-                                //             <FaUserAlt className="text-accent text-[10px] " />
-                                //             <FaUserAlt className="text-accent text-[10px] " /> */}
-                                //               {/* {Array.from(
-                                //                 {
-                                //                   length:
-                                //                     product?.prod_servingDouble,
-                                //                 },
-                                //                 (_, i) => (
-                                //                   <FaUserAlt
-                                //                     key={i}
-                                //                     className="text-accent text-[10px] "
-                                //                   />
-                                //                 )
-                                //               )} */}
-                                //               <p className="text-[14px] text-accent font-bold font-ropa">
-                                //               {product?.prod_servingDouble}
-                                //               </p>
-                                //             </div>
-                                //           </div>
-                                //         </div>
-                                //         <div></div>
-                                //       </div>
-                                //     </div>
-                                //     <div className="">
-                                //       <AddOnButton />
-                                //     </div>
-                                //   </div>
-                                // </div>
-                                <DoubleProductCard product={product} key={product.prod_id}/>
-                              ))
-                            ) : (
-                              <p>No products found</p>
+                            {subCategory.layout === "normal" && (
+                              <div className="grid grid-cols-4 tablet:grid-cols-3 mobile:grid-cols-2 gap-y-10 mobile:gap-y-5 gap-x-5 mt-5 mobile:mt-5">
+                                {subCategory.products.map((product) => (
+                                  <ProductCard
+                                    product={product}
+                                    key={product?.prod_id}
+                                    servings={true}
+                                  />
+                                ))}
+                              </div>
                             )}
-                          </>
-                        ) : (
-                          <div className="grid grid-cols-4 tablet:grid-cols-3 mobile:grid-cols-2 gap-y-10 gap-x-5 mt-5 mobile:mt-5">
-                            {subCategory?.products?.length > 0 ? (
+
+                            {subCategory.layout === "doublePrice" &&
                               subCategory.products.map((product) => (
-                                <ProductCard
+                                <DoubleProductCard
                                   product={product}
                                   key={product?.prod_id}
                                   servings={true}
+                                  catOne={subCategory?.sub_singlename}
+                                  catTwo={subCategory?.sub_doublename}
                                 />
-                              ))
-                            ) : (
-                              <p>No products found</p>
-                            )}
-                          </div>
+                              ))}
+
+                            {subCategory.layout === "single" &&
+                              subCategory.products.map((product) => (
+                                <FeaturedProduct
+                                  product={product}
+                                  key={product?.prod_id}
+                                />
+                              ))}
+                          </>
+                        ) : (
+                          <p key="no-products">No products found</p>
                         )}
                       </div>
-                    ))}
-
-                {/* Divider between categories (but not after the last one) */}
-                {/* {catIndex < SubCategoriesAndProducts.length - 1 && (
-                      <div className="w-full h-[1px] bg-accent mt-12 mb-5"></div>
-                    )} */}
-
-                {/* <div className="122">
-                  <div className="flex justify-center items-center overflow-hidden h-40 mobile:h-24 relative mb-10 mt-10 tablet:mt-0 mobile:mt-0   ">
-                    <div className="absolute left-0 top-0 w-full h-40 mobile:h-24 z-0 bg-background">
-                      <Image
-                        src={Ice1}
-                        alt={"ice cream"}
-                        width="1024"
-                        height="1024"
-                        className="w-full object-cover h-full object-center opacity-55"
-                      />
-                    </div>
-                    <h1 className="font-arizonia text-[48px] mobile:text-[28px] text-center text-accent text-primary relative z-10">
-                      Unbelievably In Love With Gelato!
-                    </h1>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <h2 className="font-kaisei text-[28px] text-accent">
-                        Make your own bowl
-                      </h2>
-                      <p className="text-white/40 p">
-                        (3 scoops + 2 sauces + 2 toppings)
-                      </p>
-                    </div>
-                    <div>
-                      <h2 className="font-Raleway text-xl font-bold text-right">
-                        Rs. 1950
-                      </h2>
-                      <div className="flex gap-2  items-center justify-end mobile:gap-2 mt-1">
-                        <h3 className="text-white/50 text-md mobile:text-base font-ropa">
-                          Servings:
-                        </h3>
-                        <div className="flex gap-2 bg-mahroon rounded-3xl px-2 py-1 mobile:p-1">
-                          <FaUserAlt className="text-accent text-[10px] " />
-                          <FaUserAlt className="text-accent text-[10px] " />
-                          <FaUserAlt className="text-accent text-[10px] " />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className=" mt-10">
-                    <Image
-                      src={Ice2}
-                      alt="icen cream"
-                      height={2000}
-                      width={2000}
-                      className=""
-                    />
-                  </div>
-                  <div className="tabs">
-                    <ProductDataTabs2 />
-                  </div>
-                </div> */}
-              </div>
-            )}
-
-            {/* //////////////////////////////////////////////////////////////////////////////////////////////// */}
-
-            {/* <div className="122">
-                  <div className="flex justify-center items-center overflow-hidden h-40 mobile:h-24 relative mb-10 mt-10 tablet:mt-0 mobile:mt-0   ">
-                    <div className="absolute left-0 top-0 w-full h-40 mobile:h-24 z-0 bg-background">
-                      <Image
-                        src={Ice1}
-                        alt={"ice cream"}
-                        width="1024"
-                        height="1024"
-                        className="w-full object-cover h-full object-center opacity-55"
-                      />
-                    </div>
-                    <h1 className="font-arizonia text-[48px] mobile:text-[28px] text-center text-accent text-primary relative z-10">
-                      Unbelievably In Love With Gelato!
-                    </h1>
-                  </div>
-                  <div className="">
-                    <h2>Waffles</h2>
-                   
-                  </div>
-                </div> */}
+                    );
+                  })}
+            </div>
           </React.Fragment>
         ))}
     </>
   );
 };
 
-export default CardsSectionsMain;
+export default CardsSectionsTesting;

@@ -107,17 +107,17 @@ const Footer = () => {
                   <span>07:00 PM to 03:00 AM</span>
                 </div>
                 <div className="flex justify-between items-center font-ropa gap-5 text-base">
-                  <span className="w-20">Monday</span>
-                  <span>:</span>
-                  <span>07:00 PM to 03:00 AM</span>
-                </div>
-                <div className="flex justify-between items-center font-ropa gap-5 text-base">
                   <span className="w-20">Tuesday</span>
                   <span>:</span>
                   <span>07:00 PM to 03:00 AM</span>
                 </div>
                 <div className="flex justify-between items-center font-ropa gap-5 text-base">
                   <span className="w-20">Wednesday</span>
+                  <span>:</span>
+                  <span>07:00 PM to 03:00 AM</span>
+                </div>
+                <div className="flex justify-between items-center font-ropa gap-5 text-base">
+                  <span className="w-20">Thursday</span>
                   <span>:</span>
                   <span>07:00 PM to 03:00 AM</span>
                 </div>

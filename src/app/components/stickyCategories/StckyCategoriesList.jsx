@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 
 const StckyCategoriesList = ({ categories, activeCategory }) => {
-  const pathname = usePathname(); // Get current path
-  const categoryRefs = useRef({}); // Store category refs
+  const pathname = usePathname(); 
+  const categoryRefs = useRef({});
   const draggableRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -18,8 +18,8 @@ const StckyCategoriesList = ({ categories, activeCategory }) => {
       setActiveHash(window.location.hash.replace("#", ""));
     };
 
-    handleHashChange(); // Set initial hash
-    window.addEventListener("hashchange", handleHashChange); // Listen for hash changes
+    handleHashChange(); 
+    window.addEventListener("hashchange", handleHashChange); 
 
     return () => {
       window.removeEventListener("hashchange", handleHashChange);

@@ -1,20 +1,32 @@
-// "use client"
+// "use client";
 
-
-// import React, { useEffect, useState, useRef } from "react";
+// import React, { useEffect, useRef } from "react";
 // import ProductCard from "@/app/components/cards/ProductCard";
 // import Image from "next/image";
 
 // import DoubleProductCard from "../cards/DoubleProductCard";
 // import FeaturedProduct from "../cards/FeaturedProduct";
 
-// const CardsSectionsTesting = ({ SubCategoriesAndProducts, setActiveCategory }) => {
-//   // const [activeCategory, setActiveCategory] = useState(null);
+// const CardsSectionsTesting = ({
+//   SubCategoriesAndProducts,
+//   setActiveCategory,
+// }) => {
 //   const categoryRefs = useRef({});
 
 //   useEffect(() => {
+//     // ✅ 1. Get the active category from URL hash when page loads
+//     const initialCategory = window.location.hash.replace("#", "").toLowerCase();
+
+//     if (initialCategory && categoryRefs.current[initialCategory]) {
+//       setActiveCategory(initialCategory);
+//       categoryRefs.current[initialCategory].scrollIntoView({
+//         behavior: "smooth",
+//         block: "start",
+//       });
+//     }
+
 //     const handleScroll = () => {
-//       const middleScreen = window.innerHeight ; // Middle of the viewport
+//       const middleScreen = window.innerHeight / 2; // Middle of the viewport
 //       let closestCategory = null;
 //       let closestDistance = Infinity;
 
@@ -22,7 +34,7 @@
 //         const categoryElement = categoryRefs.current[subCatId];
 //         if (categoryElement) {
 //           const rect = categoryElement.getBoundingClientRect();
-//           const categoryMiddle = rect.top + rect.height ; // Middle of the subcategory
+//           const categoryMiddle = rect.top + rect.height / 2;
 //           const distance = Math.abs(categoryMiddle - middleScreen);
 
 //           if (distance < closestDistance) {
@@ -32,9 +44,10 @@
 //         }
 //       });
 
-      
+//       if (closestCategory) {
 //         setActiveCategory(closestCategory);
-      
+//         window.history.replaceState(null, "", `#${closestCategory}`); // ✅ Update URL hash on scroll
+//       }
 //     };
 
 //     window.addEventListener("scroll", handleScroll);
@@ -137,11 +150,6 @@
 //             </div>
 //           </React.Fragment>
 //         ))}
-
-//       {/* Display active category (for debugging or UI use)
-//       <div className="fixed top-10 left-10 bg-white p-4 shadow-md">
-//         Active Category: {activeCategory || "None"}
-//       </div> */}
 //     </>
 //   );
 // };
@@ -149,29 +157,42 @@
 // export default CardsSectionsTesting;
 
 
+
+
+
+
 "use client";
 
 import React, { useEffect, useRef } from "react";
 import ProductCard from "@/app/components/cards/ProductCard";
 import Image from "next/image";
+import throttle from "lodash/throttle";
 
 import DoubleProductCard from "../cards/DoubleProductCard";
 import FeaturedProduct from "../cards/FeaturedProduct";
 
-const CardsSectionsTesting = ({ SubCategoriesAndProducts, setActiveCategory }) => {
+const CardsSectionsTesting = ({
+  SubCategoriesAndProducts,
+  setActiveCategory,
+}) => {
   const categoryRefs = useRef({});
+  const lastCategoryRef = useRef(null);
 
   useEffect(() => {
-    // ✅ 1. Get the active category from URL hash when page loads
     const initialCategory = window.location.hash.replace("#", "").toLowerCase();
-    
+
     if (initialCategory && categoryRefs.current[initialCategory]) {
       setActiveCategory(initialCategory);
-      categoryRefs.current[initialCategory].scrollIntoView({ behavior: "smooth", block: "start" });
+      setTimeout(() => {
+        categoryRefs.current[initialCategory].scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 300); // Delay for layout/images to render
     }
 
     const handleScroll = () => {
-      const middleScreen = window.innerHeight / 2; // Middle of the viewport
+      const middleScreen = window.innerHeight / 2;
       let closestCategory = null;
       let closestDistance = Infinity;
 
@@ -189,14 +210,19 @@ const CardsSectionsTesting = ({ SubCategoriesAndProducts, setActiveCategory }) =
         }
       });
 
-      if (closestCategory) {
+      if (
+        closestCategory &&
+        closestCategory !== lastCategoryRef.current
+      ) {
+        lastCategoryRef.current = closestCategory;
         setActiveCategory(closestCategory);
-        window.history.replaceState(null, "", `#${closestCategory}`); // ✅ Update URL hash on scroll
+        window.history.replaceState(null, "", `#${closestCategory}`);
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const throttledScroll = throttle(handleScroll, 200);
+    window.addEventListener("scroll", throttledScroll);
+    return () => window.removeEventListener("scroll", throttledScroll);
   }, [setActiveCategory]);
 
   const sortedCategoriesList = SubCategoriesAndProducts.sort(
@@ -209,7 +235,6 @@ const CardsSectionsTesting = ({ SubCategoriesAndProducts, setActiveCategory }) =
         sortedCategoriesList.map((categoryObj, catIndex) => (
           <React.Fragment key={categoryObj?.cat_id}>
             <div key={categoryObj.cat_id}>
-              {/* Category Heading */}
               <div
                 className={`flex justify-center items-center overflow-hidden h-40 mobile:h-24 relative mb-6 ${
                   catIndex <= 1 ? "mt-10" : "mt-20"
@@ -229,7 +254,6 @@ const CardsSectionsTesting = ({ SubCategoriesAndProducts, setActiveCategory }) =
                 </h1>
               </div>
 
-              {/* Subcategories */}
               {categoryObj.sub_categories?.length > 0 &&
                 [...categoryObj.sub_categories]
                   .sort((a, b) => a.position - b.position)
