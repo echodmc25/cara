@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -13,19 +12,33 @@ const StckyCategoriesList = ({ categories, activeCategory }) => {
   const [scrollLeft, setScrollLeft] = useState(0);
   const [activeHash, setActiveHash] = useState("");
 
-  useEffect(() => {
-    const handleHashChange = () => {
-      setActiveHash(window.location.hash.replace("#", ""));
-    };
-
-    handleHashChange(); 
-    window.addEventListener("hashchange", handleHashChange); 
-
-    return () => {
-      window.removeEventListener("hashchange", handleHashChange);
-    };
-  }, []);
-
+ 
+   useEffect(() => {
+     // 🔥 Intersection Observer to Track Active Category
+     const observerOptions = {
+       root: null,
+       rootMargin: "0px",
+       threshold: 0.5, // 50% visibility triggers update
+     };
+ 
+     const observer = new IntersectionObserver((entries) => {
+       entries.forEach((entry) => {
+         if (entry.isIntersecting) {
+           const newActive = entry.target.id;
+           setActiveHash(newActive);
+           window.history.replaceState(null, "", `#${newActive}`);
+         }
+       });
+     }, observerOptions);
+ 
+     const sections = document.querySelectorAll(".category-section");
+     sections.forEach((section) => observer.observe(section));
+ 
+     return () => {
+       sections.forEach((section) => observer.unobserve(section));
+     };
+   }, []);
+   
   const handleStart = (e) => {
     setIsDragging(true);
     setStartX(e.pageX || e.touches[0].pageX);
@@ -44,7 +57,7 @@ const StckyCategoriesList = ({ categories, activeCategory }) => {
     setIsDragging(false);
   };
 
-  useEffect(() => {
+ useEffect(() => {
     const draggable = draggableRef.current;
 
     if (draggable) {
@@ -74,14 +87,13 @@ const StckyCategoriesList = ({ categories, activeCategory }) => {
     const targetElement = document.getElementById(sub_catname);
     if (targetElement) {
       window.scrollTo({
-        top: targetElement.offsetTop - 50,
-        behavior: "smooth",
+        top: targetElement.offsetTop,
+        behavior: "auto",
       });
       window.history.replaceState(null, "", `#${sub_catname}`);
-      setActiveHash(sub_catname); // Update active state
+      setActiveHash(sub_catname);
     }
   };
-
   return (
     <div className="sticky top-0 pt-10 pb-5 mobile:pt-5 bg-background z-30 overflow-hidden tablet:hidden ">
       <div className="relative">

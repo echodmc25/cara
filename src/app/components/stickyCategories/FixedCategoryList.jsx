@@ -85,11 +85,11 @@ const FixedCategoryList = ({ categories, activeCategory }) => {
     const targetElement = document.getElementById(sub_catname);
     if (targetElement) {
       window.scrollTo({
-        top: targetElement.offsetTop - 100,
-        behavior: "smooth",
+        top: targetElement.offsetTop,
+        behavior: "auto",
       });
       window.history.replaceState(null, "", `#${sub_catname}`);
-      setActiveHash(sub_catname); // Update active state
+      setActiveHash(sub_catname);
     }
   };
 
@@ -103,8 +103,8 @@ const FixedCategoryList = ({ categories, activeCategory }) => {
           {categories.map((category) => {
             const formattedCategory = category.sub_catname
               ?.trim()
-              .replace(/[^\w\s-]/g, "") // Remove special characters
-              .replace(/\s+/g, "-") // Replace spaces with hyphens
+              .replace(/[^\w\s-]/g, "")
+              .replace(/\s+/g, "-") 
               .toLowerCase();
 
             const isActive = activeHash === formattedCategory;
@@ -123,8 +123,8 @@ const FixedCategoryList = ({ categories, activeCategory }) => {
                   <Image
                     src={category?.sub_catimg}
                     alt={category?.sub_catname}
-                    width={100} // ✅ Required for Next.js Image optimization
-                    height={100} // ✅ Required for Next.js Image optimization
+                    width={100}
+                    height={100}
                     className={`w-[100px] h-[100px] mobile:h-14 mobile:w-14 object-cover object-center rounded-full border-[4px] ${
                       formattedCategory == activeCategory ? "border-mahroon" : "border-black"
                     }`}

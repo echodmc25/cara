@@ -29,13 +29,12 @@ export default function Menu({ categories, Toppings, SubCategoriesAndProducts })
     }
   }, [productId]);
   
-  console.log(productId)
 
 
   return (
     <div className="pb-10 laptop:px-8 laptop:pb-56 tablet:pb-10 mobile:pb-10  mobile:px-5">
       <div className="container relative">
-        <StckyCategoriesList categories={sortedCategoriesList} activeCategory={activeCategory} />
+        <StckyCategoriesList categories={sortedCategoriesList} activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
         <div className="relative">
           <CardsSectionsTesting
             SubCategoriesAndProducts={SubCategoriesAndProducts}
@@ -44,7 +43,7 @@ export default function Menu({ categories, Toppings, SubCategoriesAndProducts })
         </div>
       </div>
       <TabsPopup toppings={filteredTopping} />
-      <FixedCategoryList categories={sortedCategoriesList} activeCategory={activeCategory}/>
+      <FixedCategoryList categories={sortedCategoriesList} activeCategory={activeCategory} setActiveCategory={setActiveCategory}/>
     </div>
   );
 }

@@ -7,7 +7,7 @@ const FeaturedProduct = ({ product }) => {
 
   return (
     <>
-      <div className="flex justify-between items-center border-t border-accent pt-3">
+      <div className="flex justify-between items-center border-t border-accent pt-3 mobile:flex-col mobile:items-start">
         <div>
           <h2 className="font-kaisei text-[28px] text-accent">
             {product.prod_name}
@@ -15,10 +15,10 @@ const FeaturedProduct = ({ product }) => {
           <p className="text-white/40 p">{product.prod_desc}</p>
         </div>
         <div>
-          <h2 className="font-Raleway text-xl font-bold text-right">
+          <h2 className="font-Raleway text-xl font-bold text-right mobile:text-start">
             Rs. {product.prod_price}
           </h2>
-          <div className="flex gap-2 items-center justify-end mobile:gap-2 mt-1">
+          <div className="flex gap-2 items-center justify-end mobile:gap-2 mt-1 mobile:justify-start mobile:items-start">
             <h3 className="text-white/50 text-md mobile:text-base font-ropa">
               Servings:
             </h3>
