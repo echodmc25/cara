@@ -94,7 +94,7 @@ const Page = () => {
                     <p className="flex items-center mb-6">
                       <BsFillClockFill className="text-accent text-xl min-w-8 mobile:w-4" />
                       <h5 className="text-black text-base font-normal font-raleway leading-6 ml-5 mobile:text-sm">
-                        <strong> Mon - Sun: </strong> 07pm - 03AM For Ramdan Only 
+                        <strong> Mon - Sun: </strong> 05:00 PM to 02:00 AM 
                         {/* <br /> */}
                         {/* <strong>Fri - Sun:</strong>  05pm - 02AM */}
                       </h5>
