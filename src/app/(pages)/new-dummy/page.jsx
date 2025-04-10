@@ -8,7 +8,7 @@ import CardsSectionsMain from "@/app/components/section/CardsSectionsMain";
 const getSubCategoriesWithProducts = async (cat_id) => {
   try {
     const res = await fetch(
-      `https://admin.carabliss.pk/get_newProduct.php`,
+      `https://clients.echodigital.net/carabliss/get_newProduct.php`,
       { cache: "no-store" } // Always fetch fresh data
     );
 
@@ -24,7 +24,7 @@ const getSubCategoriesWithProducts = async (cat_id) => {
 const getCategories = async () => {
   try {
     const res = await fetch(
-      "https://admin.carabliss.pk/get_subcat5.php",
+      "https://clients.echodigital.net/carabliss/get_subcat5.php",
       {
         cache: "no-store", // Ensures fresh data on every request
       }

@@ -21,7 +21,7 @@ import BannerSlider from "@/app/components/slides/BannerSlider";
 const getCategories = async () => {
   try {
     const res = await fetch(
-      "https://admin.carabliss.pk/get_subcat5.php",
+      "https://clients.echodigital.net/carabliss/get_subcat5.php",
       {
         cache: "no-store", // Ensures fresh data on every request
       }
@@ -45,7 +45,8 @@ export default async function Home() {
 
   const slides = [
     {
-      image: Banner,
+      type: "image",
+      media: Banner,
       title: "EXPERIENCE THE BLISS",
       subtitle: "Dessert Boutique",
       description:
@@ -53,15 +54,17 @@ export default async function Home() {
       buttonText: "Explore More",
       buttonLink: "/menu",
     },
-    // {
-    //   image: Banner,
-    //   title: "Experience the Best",
-    //   subtitle: "Delicious Delights",
-    //   description:
-    //     "Discover the finest selection of meals crafted with perfection. Indulge in taste, quality, and an unforgettable experience.",
-    //   buttonText: "Our Special Menu",
-    //   buttonLink: "/menu",
-    // },
+    {
+      type: "video",
+      media:
+        "https://clients.echodigital.net/carabliss/uploads/products/recording.mp4",
+      title: "Experience the Best",
+      subtitle: "Delicious Delights",
+      description:
+        "Discover the finest selection of meals crafted with perfection. Indulge in taste, quality, and an unforgettable experience.",
+      buttonText: "Our Special Menu",
+      buttonLink: "/menu",
+    },
   ];
 
   const images = [P1, P3, P2, P4, P5, P6, P7, P8];
@@ -139,4 +142,3 @@ export default async function Home() {
     </>
   );
 }
-

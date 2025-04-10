@@ -12,35 +12,35 @@ const ProductCard = ({ product, servings = false }) => {
   // const [listed, setListed] = useState(false);
 
   const productToppings = (id) => {
-    setProductId(id)
-    setListOpen(true)
-  }
+    setProductId(id);
+    setListOpen(true);
+  };
 
   const [currentSlide, setCurrentSlide] = useState(0);
-  const slides = product?.product_images || []; 
+  const slides = product?.product_images || [];
 
-  useEffect(() => {
-    if (slides.length <= 1) return;
+  // useEffect(() => {
+  //   if (slides.length <= 1) return;
 
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000); 
+  //   const interval = setInterval(() => {
+  //     setCurrentSlide((prev) => (prev + 1) % slides.length);
+  //   }, 100000000);
 
-    return () => clearInterval(interval);
-  }, [slides.length]);
+  //   return () => clearInterval(interval);
+  // }, [slides.length]);
 
   const renderSlide = (slide, index) => {
     if (slide.type === "video") {
       return (
-        <iframe
+        <video
           key={index}
           src={slide.src}
           className="w-full h-full aspect-square object-cover"
-          frameBorder="0"
-          allow="autoplay; encrypted-media"
-          allowFullScreen
-          title={`Slide ${index}`}
-        ></iframe>
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
       );
     } else {
       return (
@@ -59,7 +59,7 @@ const ProductCard = ({ product, servings = false }) => {
   return (
     <div className="relative group z-0">
       <button
-        onClick={()=>productToppings(product?.prod_id)}
+        onClick={() => productToppings(product?.prod_id)}
         className="bg-[#00000090] text-accent px-2 py-1 font-ropa font-medium text-lg flex gap-2 items-center absolute w-fit right-0 top-0 z-10"
       >
         <FaPlus className="text-accent text-lg" />
@@ -107,7 +107,6 @@ const ProductCard = ({ product, servings = false }) => {
           <h3 className="h4 text-accent mb-1 -mt-2">{product?.prod_name}</h3>
           {product?.prod_desc && (
             <p className="text-base text-white/50 font-ropa mb-3 leading-5">
-              
               {product?.prod_desc}
             </p>
           )}
@@ -124,8 +123,8 @@ const ProductCard = ({ product, servings = false }) => {
                   <FaUserAlt key={i} className="text-accent text-[10px] " />
                 ))} */}
                 <p className="text-[14px] text-accent font-bold font-ropa">
-                                              {product?.prod_serving}
-                                              </p>
+                  {product?.prod_serving}
+                </p>
               </div>
             </div>
           )}

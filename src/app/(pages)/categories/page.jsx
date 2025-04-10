@@ -4,8 +4,8 @@ import Menu from "@/app/components/menuComponent/Menu";
 const getSubCategoriesWithProducts = async () => {
   try {
     const res = await fetch(
-      `https://admin.carabliss.pk/get_newProductLatest.php`,
-      { cache: "no-store" } 
+      `https://clients.echodigital.net/carabliss/get_newProductLatest.php`,
+      { cache: "no-store" }
     );
 
     if (!res.ok) throw new Error("Failed to fetch products");
@@ -20,9 +20,9 @@ const getSubCategoriesWithProducts = async () => {
 const getCategories = async () => {
   try {
     const res = await fetch(
-      "https://admin.carabliss.pk/get_subcat5.php",
+      "https://clients.echodigital.net/carabliss/get_subcat5.php",
       {
-        cache: "no-store", 
+        cache: "no-store",
       }
     );
 
@@ -40,9 +40,9 @@ const getCategories = async () => {
 const getToppings = async () => {
   try {
     const res = await fetch(
-      "https://admin.carabliss.pk/get_toppings.php",
+      "https://clients.echodigital.net/carabliss/get_toppings.php",
       {
-        cache: "no-store", 
+        cache: "no-store",
       }
     );
 
@@ -57,18 +57,16 @@ const getToppings = async () => {
   }
 };
 
-
 export default async function MenuPage() {
-  
   const SubCategoriesAndProducts = await getSubCategoriesWithProducts();
-  const categories = await getCategories(); 
-  const Toppings = await getToppings(); 
+  const categories = await getCategories();
+  const Toppings = await getToppings();
 
   return (
     <Menu
-    categories={categories}
-    SubCategoriesAndProducts={SubCategoriesAndProducts}
-    Toppings={Toppings}
-  />
+      categories={categories}
+      SubCategoriesAndProducts={SubCategoriesAndProducts}
+      Toppings={Toppings}
+    />
   );
 }

@@ -60,7 +60,7 @@ const Page = () => {
 
     try {
       const response = await axios.post(
-        "https://admin.carabliss.pk/add_careers.php",
+        "https://clients.echodigital.net/carabliss/add_careers.php",
         formDataToSend,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -69,7 +69,6 @@ const Page = () => {
       );
 
       console.log("Response Data:", response.data);
-
 
       if (response.data?.code === 200) {
         toast.success("Application submitted successfully!");

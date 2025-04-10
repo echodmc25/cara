@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "admin.carabliss.pk",
+        hostname: "clients.echodigital.net",
       },
     ],
   },

@@ -7,7 +7,7 @@ import { IoIosMail, IoMdPin } from "react-icons/io";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
-import Cara from "@/app/assets/images/cara-outlet.png"
+import Cara from "@/app/assets/images/cara-outlet.png";
 
 const Page = () => {
   // Form states
@@ -35,7 +35,7 @@ const Page = () => {
 
     try {
       const response = await axios.post(
-        "https://admin.carabliss.pk/add_contact.php",
+        "https://clients.echodigital.net/carabliss/add_contact.php",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -94,7 +94,7 @@ const Page = () => {
                     <p className="flex items-center mb-6">
                       <BsFillClockFill className="text-accent text-xl min-w-8 mobile:w-4" />
                       <h5 className="text-black text-base font-normal font-raleway leading-6 ml-5 mobile:text-sm">
-                        <strong> Mon - Sun: </strong> 05:00 PM to 02:00 AM 
+                        <strong> Mon - Sun: </strong> 05:00 PM to 02:00 AM
                         {/* <br /> */}
                         {/* <strong>Fri - Sun:</strong>  05pm - 02AM */}
                       </h5>
@@ -137,25 +137,87 @@ const Page = () => {
               Send Us A Message
             </h2>
             <form onSubmit={handleSubmit}>
-              <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 mb-5" placeholder="Name" required />
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 mb-5" placeholder="Email" required />
-              <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 mb-5" placeholder="Phone" required />
-              <h4 className="text-gray-500 text-lg mb-4">Preferred method of communication</h4>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 mb-5"
+                placeholder="Name"
+                required
+              />
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 mb-5"
+                placeholder="Email"
+                required
+              />
+              <input
+                type="text"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 mb-5"
+                placeholder="Phone"
+                required
+              />
+              <h4 className="text-gray-500 text-lg mb-4">
+                Preferred method of communication
+              </h4>
               <div className="flex mb-5">
                 <label className="flex items-center mr-5 cursor-pointer">
-                  <input type="radio" name="preferredMethod" value="Email" checked={preferredMethod === "Email"} onChange={() => setPreferredMethod("Email")} className="hidden" />
-                  <span className={`border rounded-full w-4 h-4 mr-2 ${preferredMethod === "Email" ? "bg-mahroon" : ""}`} /> Email
+                  <input
+                    type="radio"
+                    name="preferredMethod"
+                    value="Email"
+                    checked={preferredMethod === "Email"}
+                    onChange={() => setPreferredMethod("Email")}
+                    className="hidden"
+                  />
+                  <span
+                    className={`border rounded-full w-4 h-4 mr-2 ${
+                      preferredMethod === "Email" ? "bg-mahroon" : ""
+                    }`}
+                  />{" "}
+                  Email
                 </label>
                 <label className="flex items-center cursor-pointer">
-                  <input type="radio" name="preferredMethod" value="Phone" checked={preferredMethod === "Phone"} onChange={() => setPreferredMethod("Phone")} className="hidden" />
-                  <span className={`border rounded-full w-4 h-4 mr-2 ${preferredMethod === "Phone" ? "bg-mahroon" : ""}`} /> Phone
+                  <input
+                    type="radio"
+                    name="preferredMethod"
+                    value="Phone"
+                    checked={preferredMethod === "Phone"}
+                    onChange={() => setPreferredMethod("Phone")}
+                    className="hidden"
+                  />
+                  <span
+                    className={`border rounded-full w-4 h-4 mr-2 ${
+                      preferredMethod === "Phone" ? "bg-mahroon" : ""
+                    }`}
+                  />{" "}
+                  Phone
                 </label>
               </div>
-              <textarea value={message} onChange={(e) => setMessage(e.target.value)} className="w-full py-4 h-44 text-white bg-transparent text-lg border border-gray-200 rounded-2xl px-4 mb-5 tablet:h-24" placeholder="Message" required />
-              <button type="submit" className="bg-accent text-mahroon w-full font-bold text-lg py-4 rounded-full hover:bg-white duration-300">{loading ? "Sending..." : "Send"}</button>
+              <textarea
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                className="w-full py-4 h-44 text-white bg-transparent text-lg border border-gray-200 rounded-2xl px-4 mb-5 tablet:h-24"
+                placeholder="Message"
+                required
+              />
+              <button
+                type="submit"
+                className="bg-accent text-mahroon w-full font-bold text-lg py-4 rounded-full hover:bg-white duration-300"
+              >
+                {loading ? "Sending..." : "Send"}
+              </button>
             </form>
             {responseMessage && (
-              <p className={`mt-4 text-center text-lg ${responseType === "success" ? "text-green-500" : "text-red-500"}`}>
+              <p
+                className={`mt-4 text-center text-lg ${
+                  responseType === "success" ? "text-green-500" : "text-red-500"
+                }`}
+              >
                 {responseMessage}
               </p>
             )}

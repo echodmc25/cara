@@ -1,10 +1,9 @@
 import CategoriesCards from "@/app/components/cards/CategoriesCards";
 
-
 const getCategoriesList = async () => {
   try {
     const res = await fetch(
-      "https://admin.carabliss.pk/get_categoriesnew5.php",
+      "https://clients.echodigital.net/carabliss/get_categoriesnew5.php",
       {
         cache: "no-store", // Ensures fresh data on every request
       }
@@ -22,7 +21,6 @@ const getCategoriesList = async () => {
 };
 
 export default async function Home() {
- 
   const categoriesList = await getCategoriesList(); // Fetch data on the server
 
   const sortedCategoriesList = categoriesList.sort(
@@ -55,7 +53,6 @@ export default async function Home() {
             <p className="text-center text-red-500">No categories found.</p>
           )}
         </div>
-   
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ export const CategoryProvider = ({ children }) => {
     const fetchCategories = async () => {
       try {
         const response = await fetch(
-          "https://admin.carabliss.pk/get_categories.php"
+          "https://clients.echodigital.net/carabliss/get_categories.php"
         );
         if (!response.ok) throw new Error("Failed to fetch categories");
 

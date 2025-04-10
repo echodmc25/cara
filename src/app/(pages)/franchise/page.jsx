@@ -32,7 +32,7 @@ const Page = () => {
 
     try {
       const response = await axios.post(
-        "https://admin.carabliss.pk/add_franchise.php",
+        "https://clients.echodigital.net/carabliss/add_franchise.php",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -78,27 +78,80 @@ const Page = () => {
         <div>
           <h1 className="page-heading text-accent text-center">Franchise</h1>
           <p className="text-white/60 p text-center mb-8 mt-2 max-w-[750px] mx-auto">
-            Interested in bringing the magic of Carabliss to your city? We’re as excited as you!
+            Interested in bringing the magic of Carabliss to your city? We’re as
+            excited as you!
           </p>
           <div className="bg-black p-5 lg:p-11 lg:rounded-r-2xl rounded-2xl max-w-[700px] mx-auto">
             <h2 className="text-accent font-kaisei h2 font-semibold leading-10 mb-8 mobile:text-center">
               Application Form
             </h2>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-5 mobile:gap-3">
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-5 mobile:gap-3"
+            >
               <div className="flex justify-between items-center gap-5 mobile:flex-col mobile:gap-3">
-              <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 " placeholder="Full Name" required />
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 " placeholder="Email Address" required />
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 "
+                  placeholder="Full Name"
+                  required
+                />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 "
+                  placeholder="Email Address"
+                  required
+                />
               </div>
               <div className="flex justify-between items-center gap-5 mobile:flex-col mobile:gap-3">
-              <input type="text" value={contact} onChange={(e) => setContact(e.target.value)} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 " placeholder="Contact Number" required />
-              <input type="text" value={city} onChange={(e) => setCity(e.target.value)} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 " placeholder="City of Interest" required />
+                <input
+                  type="text"
+                  value={contact}
+                  onChange={(e) => setContact(e.target.value)}
+                  className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 "
+                  placeholder="Contact Number"
+                  required
+                />
+                <input
+                  type="text"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 "
+                  placeholder="City of Interest"
+                  required
+                />
               </div>
-              <textarea value={whyCarabliss} onChange={(e) => setWhyCarabliss(e.target.value)} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 " placeholder="Why Carabliss?" required />
-              <textarea value={previousExperience} onChange={(e) => setPreviousExperience(e.target.value)} className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 " placeholder="Previous Business Experience" required />
-              <button type="submit" className="bg-accent text-mahroon w-full font-bold text-lg py-4 rounded-full hover:bg-white duration-300">{loading ? "Submitting..." : "Submit"}</button>
+              <textarea
+                value={whyCarabliss}
+                onChange={(e) => setWhyCarabliss(e.target.value)}
+                className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 "
+                placeholder="Why Carabliss?"
+                required
+              />
+              <textarea
+                value={previousExperience}
+                onChange={(e) => setPreviousExperience(e.target.value)}
+                className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 "
+                placeholder="Previous Business Experience"
+                required
+              />
+              <button
+                type="submit"
+                className="bg-accent text-mahroon w-full font-bold text-lg py-4 rounded-full hover:bg-white duration-300"
+              >
+                {loading ? "Submitting..." : "Submit"}
+              </button>
             </form>
             {responseMessage && (
-              <p className={`mt-4 text-center text-lg ${responseType === "success" ? "text-green-500" : "text-red-500"}`}>
+              <p
+                className={`mt-4 text-center text-lg ${
+                  responseType === "success" ? "text-green-500" : "text-red-500"
+                }`}
+              >
                 {responseMessage}
               </p>
             )}
