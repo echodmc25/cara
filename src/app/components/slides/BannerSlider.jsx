@@ -49,11 +49,11 @@ const BannerSlider = ({ slides }) => {
   const settings = {
     dots: isMobile, // Hide dots on mobile, show on tablet & desktop
     infinite: false,
-    speed: 1000,
+    speed: 2000,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 13000,
     nextArrow: isMobile ? null : <CustomArrow direction="next" />,
     prevArrow: isMobile ? null : <CustomArrow direction="prev" />,
     appendDots: (dots) =>

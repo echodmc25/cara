@@ -1,4 +1,5 @@
 import CategoriesCards from "@/app/components/cards/CategoriesCards";
+import VideoCardsSlider from "@/app/components/slides/VideoCardsSlider";
 
 const getCategoriesList = async () => {
   try {
@@ -27,9 +28,68 @@ export default async function Home() {
     (a, b) => a.position - b.position
   );
 
+  const VideoCardsData = [
+    {
+      productName: "Chocolate Sushi",
+      productVid:
+        "https://clients.echodigital.net/carabliss/uploads/featuredvideos/Chocolate-Sushi.mp4",
+      // productServings: "2-3 & 4-5",
+      // productDes: "",
+      // productPrice: "1650 - 2850",
+    },
+    {
+      productName: "Dubais Viral Chocolate Waffle",
+      productVid:
+        "https://clients.echodigital.net/carabliss/uploads/products/Dubais-Viral-Chocolate-Waffle-Reel.mp4",
+      // productServings: "2-3 & 4-5",
+      // productDes: "",
+      // productPrice: "2950 - 4250",
+    },
+    {
+      productName: "Ferrero Rocher Waffle",
+      productVid:
+        "https://clients.echodigital.net/carabliss/uploads/products/Ferrero-Rocher-Waffle.mp4",
+      // productServings: "2-3 & 4-5",
+      // productDes: "",
+      // productPrice: "2950 - 4250",
+    },
+    {
+      productName: "KitKat Shake",
+      productVid:
+        "https://clients.echodigital.net/carabliss/uploads/products/KitKat-Shake-Reel.mp4",
+      // productServings: "2-3",
+      // productDes: "",
+      // productPrice: "2350",
+    },
+    {
+      productName: "Raffaello Waffle",
+      productVid:
+        "https://clients.echodigital.net/carabliss/uploads/products/Raffaello-Waffle.mp4",
+      // productServings: "2-3 & 4-5",
+      // productDes: "",
+      // productPrice: "2950 - 4250",
+    },
+    {
+      productName: "Signature Hot Chocolate",
+      productVid:
+        "https://clients.echodigital.net/carabliss/uploads/products/Signature-Hot-Chocolate-Reel.mp4",
+      // productServings: "1 & 2-3",
+      // productDes: "",
+      // productPrice: "1350 - 1950",
+    },
+    {
+      productName: "Skillet Cookie with Vanilla Gelato",
+      productVid:
+        "https://clients.echodigital.net/carabliss/uploads/products/Skillet-Cookie-with-Vanilla-Gelato.mp4",
+      // productServings: "2-3",
+      // productDes: "",
+      // productPrice: "2450",
+    },
+  ];
+
   return (
     <div className="">
-      <div className="pt-14 pb-24 mobile:pb-14 mobile:pt-12 px-5 flex justify-center items-center">
+      {/* <div className="pt-14 pb-24 mobile:pb-14 mobile:pt-12 px-5 flex justify-center items-center">
         <div className="max-w-[660px]">
           <h3 className="font-bodoni text-[36px] mobile:text-[24px] leading-tight mb-2 text-mahroon text-center">
             Why should happiness come with a boarding pass?
@@ -42,7 +102,26 @@ export default async function Home() {
             desserts are made to bring delight to every bite.
           </p>
         </div>
+      </div> */}
+
+      <div className="py-20  mobile:pb-20 mobile:pt-12 categories-list-carousel container">
+        <div className="max-w-[660px] mx-auto mb-10 px-5">
+          <h3 className="font-bodoni text-[36px] mobile:text-[24px] leading-tight mb-2 text-mahroon text-center">
+            Why should happiness come with a boarding pass?
+          </h3>
+          <h2 className="page-heading text-[--accent] leading-[64px] uppercase text-center">
+            Menu
+          </h2>
+          <p className="p text-center text-[#837C74] mt-5">
+            Crafted with premium ingredients and designed for sharing, our
+            desserts are made to bring delight to every bite.
+          </p>
+        </div>
+        <div className="tablet:mx-5">
+          <VideoCardsSlider categorySlides={VideoCardsData} />
+        </div>
       </div>
+
       <div className="container px-5">
         <div className="mb-14 grid grid-cols-3 tablet:grid-cols-2 mobile:grid-cols-1">
           {sortedCategoriesList.length > 0 ? (

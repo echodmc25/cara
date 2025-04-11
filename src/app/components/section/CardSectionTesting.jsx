@@ -7,7 +7,6 @@ import throttle from "lodash/throttle";
 
 import DoubleProductCard from "../cards/DoubleProductCard";
 import FeaturedProduct from "../cards/FeaturedProduct";
-import { FaMosque } from "react-icons/fa6";
 
 const CardsSectionsTesting = ({
   SubCategoriesAndProducts,
@@ -18,7 +17,7 @@ const CardsSectionsTesting = ({
 
   useEffect(() => {
     const initialCategory = window.location.hash.replace("#", "").toLowerCase();
-  
+
     if (initialCategory && categoryRefs.current[initialCategory]) {
       setActiveCategory(initialCategory);
       setTimeout(() => {
@@ -28,46 +27,44 @@ const CardsSectionsTesting = ({
         });
       }, 300);
     }
-  
+
     const handleScroll = () => {
       let mostVisibleCat = null;
       let minOffset = Infinity;
-    
+
       Object.entries(categoryRefs.current).forEach(([subCatId, el]) => {
         if (el) {
           const rect = el.getBoundingClientRect();
           const elementTop = rect.top;
           const elementBottom = rect.bottom;
           const elementHeight = rect.height;
-    
+
           const visibleTop = Math.max(rect.top, 0);
           const visibleBottom = Math.min(rect.bottom, window.innerHeight);
           const visibleHeight = Math.max(0, visibleBottom - visibleTop);
           const visibilityRatio = visibleHeight / elementHeight;
-    
+
           const isInView = visibilityRatio >= 0;
-    
+
           if (isInView && Math.abs(elementTop) <= minOffset) {
             minOffset = Math.abs(elementTop);
             mostVisibleCat = subCatId;
           }
         }
       });
-    
+
       if (mostVisibleCat && mostVisibleCat !== lastCategoryRef.current) {
         lastCategoryRef.current = mostVisibleCat;
-        console.log(mostVisibleCat)
+        console.log(mostVisibleCat);
         setActiveCategory(mostVisibleCat);
         window.history.replaceState(null, "", `#${mostVisibleCat}`);
       }
     };
-    
-  
+
     const throttledScroll = throttle(handleScroll, 100);
     window.addEventListener("scroll", throttledScroll);
     return () => window.removeEventListener("scroll", throttledScroll);
   }, [setActiveCategory]);
-  
 
   const sortedCategoriesList = SubCategoriesAndProducts.sort(
     (a, b) => a.cat_position - b.cat_position

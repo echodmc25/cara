@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 
 const StckyCategoriesList = ({ categories, activeCategory }) => {
-  const pathname = usePathname(); 
+  const pathname = usePathname();
   const categoryRefs = useRef({});
   const draggableRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -12,33 +12,32 @@ const StckyCategoriesList = ({ categories, activeCategory }) => {
   const [scrollLeft, setScrollLeft] = useState(0);
   const [activeHash, setActiveHash] = useState("");
 
- 
-   useEffect(() => {
-     // 🔥 Intersection Observer to Track Active Category
-     const observerOptions = {
-       root: null,
-       rootMargin: "0px",
-       threshold: 0.5, // 50% visibility triggers update
-     };
- 
-     const observer = new IntersectionObserver((entries) => {
-       entries.forEach((entry) => {
-         if (entry.isIntersecting) {
-           const newActive = entry.target.id;
-           setActiveHash(newActive);
-           window.history.replaceState(null, "", `#${newActive}`);
-         }
-       });
-     }, observerOptions);
- 
-     const sections = document.querySelectorAll(".category-section");
-     sections.forEach((section) => observer.observe(section));
- 
-     return () => {
-       sections.forEach((section) => observer.unobserve(section));
-     };
-   }, []);
-   
+  useEffect(() => {
+    // 🔥 Intersection Observer to Track Active Category
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.5, // 50% visibility triggers update
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const newActive = entry.target.id;
+          setActiveHash(newActive);
+          window.history.replaceState(null, "", `#${newActive}`);
+        }
+      });
+    }, observerOptions);
+
+    const sections = document.querySelectorAll(".category-section");
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+    };
+  }, []);
+
   const handleStart = (e) => {
     setIsDragging(true);
     setStartX(e.pageX || e.touches[0].pageX);
@@ -57,7 +56,7 @@ const StckyCategoriesList = ({ categories, activeCategory }) => {
     setIsDragging(false);
   };
 
- useEffect(() => {
+  useEffect(() => {
     const draggable = draggableRef.current;
 
     if (draggable) {
@@ -116,12 +115,12 @@ const StckyCategoriesList = ({ categories, activeCategory }) => {
               <button
                 key={category.subcat_id}
                 className={`py-3 px-6 mobile:px-4 mobile:py-2 mobile:text-sm rounded-3xl border ${
-                  (category.sub_catname
-                .trim()
-                .replace(/[^\w\s-]/g, "")
-                .replace(/\s+/g, "-") 
-                .toLowerCase() == activeCategory) ?
-                     "border-mahroon bg-mahroon text-white"
+                  category.sub_catname
+                    .trim()
+                    .replace(/[^\w\s-]/g, "")
+                    .replace(/\s+/g, "-")
+                    .toLowerCase() == activeCategory
+                    ? "border-mahroon bg-mahroon text-white"
                     : "border-accent text-accent"
                 } font-ropa text-base min-w-fit`}
                 onClick={(e) => {

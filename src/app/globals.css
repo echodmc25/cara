@@ -46,6 +46,7 @@ body {
 }
 .bg-mahroon {
   background: var(--mahroon);
+  background-color: #800000; /* Replace with your desired color */
 }
 
 .container {
@@ -137,6 +138,14 @@ html {
   bottom: -40px !important;
 }
 
+.swiper-button-prev::after {
+  display: none !important;
+}
+
+.swiper-button-next::after {
+  display: none !important;
+}
+
 .slick-dots {
   bottom: 20px !important;
   display: flex !important;
@@ -177,6 +186,20 @@ button.slick-arrow {
 
 .cat-img {
   aspect-ratio: 5 / 7;
+}
+
+/* Preloader Animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
 }
 
 /* Responsive Styles */
