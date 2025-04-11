@@ -32,7 +32,7 @@ export default async function Home() {
     {
       productName: "Chocolate Sushi",
       productVid:
-        "https://clients.echodigital.net/carabliss/uploads/featuredvideos/Chocolate-Sushi.mp4",
+        "https://www.youtube.com/embed/XkoPxi01u9M?autoplay=1&mute=1&loop=1&playlist=XkoPxi01u9M&controls=0",
       // productServings: "2-3 & 4-5",
       // productDes: "",
       // productPrice: "1650 - 2850",
