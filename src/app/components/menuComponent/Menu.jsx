@@ -7,34 +7,36 @@ import TabsPopup from "@/app/components/popups/TabsPopup";
 import CardsSectionsTesting from "@/app/components/section/CardSectionTesting";
 import { PopupProvider, usePopup } from "@/app/context/PopContext";
 
-export default function Menu({ categories, Toppings, SubCategoriesAndProducts }) {
-  const sortedCategoriesList = categories.sort((a, b) => a.position - b.position);
-  
+export default function Menu({
+  categories,
+  Toppings,
+  SubCategoriesAndProducts,
+}) {
+  const sortedCategoriesList = categories.sort(
+    (a, b) => a.position - b.position
+  );
 
-  
-  const {productId} = usePopup();
+  const { productId } = usePopup();
   const [activeCategory, setActiveCategory] = useState("");
 
-
-
-
   const [filteredTopping, setFilteredTopping] = useState([]);
-  
-  
+
   useEffect(() => {
     if (productId && Toppings[productId]) {
       setFilteredTopping(Toppings[productId]);
     } else {
-      setFilteredTopping([]); 
+      setFilteredTopping([]);
     }
   }, [productId]);
-  
-
 
   return (
     <div className="pb-10 laptop:px-8 laptop:pb-56 tablet:pb-10 mobile:pb-10  mobile:px-5">
       <div className="container relative">
-        <StckyCategoriesList categories={sortedCategoriesList} activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
+        <StckyCategoriesList
+          categories={sortedCategoriesList}
+          activeCategory={activeCategory}
+          setActiveCategory={setActiveCategory}
+        />
         <div className="relative">
           <CardsSectionsTesting
             SubCategoriesAndProducts={SubCategoriesAndProducts}
@@ -43,7 +45,11 @@ export default function Menu({ categories, Toppings, SubCategoriesAndProducts })
         </div>
       </div>
       <TabsPopup toppings={filteredTopping} />
-      <FixedCategoryList categories={sortedCategoriesList} activeCategory={activeCategory} setActiveCategory={setActiveCategory}/>
+      <FixedCategoryList
+        categories={sortedCategoriesList}
+        activeCategory={activeCategory}
+        setActiveCategory={setActiveCategory}
+      />
     </div>
   );
 }

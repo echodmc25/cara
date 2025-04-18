@@ -6,8 +6,7 @@ import Footer from "./components/footer/Footer";
 import { PopupProvider } from "./context/PopContext";
 // import CaraFav from "./assets/images/cara-fav.png"
 import PageTransition from "./components/pageTransitions/PageTransition";
-
-
+import ScrollToTop from "./components/scroll/ScrollToTop";
 
 const arizonia = Arizonia({
   variable: "--font-arizonia",
@@ -37,7 +36,7 @@ export const metadata = {
   title: "Carabliss",
   description: "Loaded With Love, Crafted For Bliss",
   icons: {
-    icon: "cara-fav.png", 
+    icon: "cara-fav.png",
   },
 };
 
@@ -54,6 +53,7 @@ export default function RootLayout({ children }) {
         className={`${ropa.variable} ${raleway.variable} ${bodoni.variable} ${arizonia.variable} `}
       >
         {/* <PageTransition > */}
+        <ScrollToTop />
         <CartProvider>
           <HeaderWrapper />
           <main className="relative">
@@ -64,6 +64,7 @@ export default function RootLayout({ children }) {
         </CartProvider>
         {/* </PageTransition> */}
       </body>
-    </html>
-  );
+        
+    </html>
+  );
 }

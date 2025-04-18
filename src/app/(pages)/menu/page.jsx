@@ -21,8 +21,29 @@ const getCategoriesList = async () => {
   }
 };
 
+const getFeaturedVideos = async () => {
+  try {
+    const res = await fetch(
+      "https://clients.echodigital.net/carabliss/get_featuredvideo.php",
+      {
+        cache: "no-store", // Ensures fresh data on every request
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch Featured Videos");
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("Error fetching Featured Videos:", error);
+    return [];
+  }
+};
+
 export default async function Home() {
-  const categoriesList = await getCategoriesList(); // Fetch data on the server
+  const categoriesList = await getCategoriesList();
+  const FeaturedVideos = await getFeaturedVideos();
 
   const sortedCategoriesList = categoriesList.sort(
     (a, b) => a.position - b.position
@@ -31,56 +52,49 @@ export default async function Home() {
   const VideoCardsData = [
     {
       productName: "Chocolate Sushi",
-      productVid:
-        "https://www.youtube.com/embed/XkoPxi01u9M?autoplay=1&mute=1&loop=1&playlist=XkoPxi01u9M&controls=0",
+      productVid: "/videos/chocolate-suchi.mp4",
       // productServings: "2-3 & 4-5",
       // productDes: "",
       // productPrice: "1650 - 2850",
     },
     {
       productName: "Dubais Viral Chocolate Waffle",
-      productVid:
-        "https://clients.echodigital.net/carabliss/uploads/products/Dubais-Viral-Chocolate-Waffle-Reel.mp4",
+      productVid: "/videos/viral-choco-waffle.mp4",
       // productServings: "2-3 & 4-5",
       // productDes: "",
       // productPrice: "2950 - 4250",
     },
     {
       productName: "Ferrero Rocher Waffle",
-      productVid:
-        "https://clients.echodigital.net/carabliss/uploads/products/Ferrero-Rocher-Waffle.mp4",
+      productVid: "/videos/ferrero-waffle.mp4",
       // productServings: "2-3 & 4-5",
       // productDes: "",
       // productPrice: "2950 - 4250",
     },
     {
       productName: "KitKat Shake",
-      productVid:
-        "https://clients.echodigital.net/carabliss/uploads/products/KitKat-Shake-Reel.mp4",
+      productVid: "/videos/kitkat-shake.mp4",
       // productServings: "2-3",
       // productDes: "",
       // productPrice: "2350",
     },
     {
       productName: "Raffaello Waffle",
-      productVid:
-        "https://clients.echodigital.net/carabliss/uploads/products/Raffaello-Waffle.mp4",
+      productVid: "/videos/raffello-waffle.mp4",
       // productServings: "2-3 & 4-5",
       // productDes: "",
       // productPrice: "2950 - 4250",
     },
     {
       productName: "Signature Hot Chocolate",
-      productVid:
-        "https://clients.echodigital.net/carabliss/uploads/products/Signature-Hot-Chocolate-Reel.mp4",
+      productVid: "/videos/signature-chocolate.mp4",
       // productServings: "1 & 2-3",
       // productDes: "",
       // productPrice: "1350 - 1950",
     },
     {
       productName: "Skillet Cookie with Vanilla Gelato",
-      productVid:
-        "https://clients.echodigital.net/carabliss/uploads/products/Skillet-Cookie-with-Vanilla-Gelato.mp4",
+      productVid: "/videos/skillet-cookie.mp4",
       // productServings: "2-3",
       // productDes: "",
       // productPrice: "2450",
@@ -118,7 +132,7 @@ export default async function Home() {
           </p>
         </div>
         <div className="tablet:mx-5">
-          <VideoCardsSlider categorySlides={VideoCardsData} />
+          <VideoCardsSlider categorySlides={FeaturedVideos} />
         </div>
       </div>
 

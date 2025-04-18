@@ -1,15 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
-
+import React, { useState } from "react";
 import { FaPlus } from "react-icons/fa6";
+import { useSwipeable } from "react-swipeable";
 import { usePopup } from "@/app/context/PopContext";
 
 const ProductCard = ({ product, servings = false }) => {
   const { setListOpen, setProductId } = usePopup();
-
-  // const [listed, setListed] = useState(false);
 
   const productToppings = (id) => {
     setProductId(id);
@@ -19,15 +17,12 @@ const ProductCard = ({ product, servings = false }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = product?.product_images || [];
 
-  // useEffect(() => {
-  //   if (slides.length <= 1) return;
-
-  //   const interval = setInterval(() => {
-  //     setCurrentSlide((prev) => (prev + 1) % slides.length);
-  //   }, 100000000);
-
-  //   return () => clearInterval(interval);
-  // }, [slides.length]);
+  const handlers = useSwipeable({
+    onSwipedLeft: () => setCurrentSlide((prev) => (prev + 1) % slides.length),
+    onSwipedRight: () =>
+      setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1)),
+    trackMouse: true, // enable drag with mouse on desktop
+  });
 
   const renderSlide = (slide, index) => {
     if (slide.type === "video") {
@@ -35,7 +30,7 @@ const ProductCard = ({ product, servings = false }) => {
         <video
           key={index}
           src={slide.src}
-          className="w-full h-full aspect-square object-cover"
+          className="w-full h-full aspect-[5/6] object-cover"
           autoPlay
           muted
           loop
@@ -49,7 +44,7 @@ const ProductCard = ({ product, servings = false }) => {
           src={slide.src}
           width={1000}
           height={1000}
-          className="w-full h-full object-cover aspect-square"
+          className="w-full h-full object-cover aspect-[5/6]"
           alt={`Slide ${index}`}
         />
       );
@@ -67,29 +62,28 @@ const ProductCard = ({ product, servings = false }) => {
       </button>
 
       <div>
-        <div className="relative w-full overflow-hidden aspect-[5/6]">
+        <div
+          {...handlers}
+          className="relative w-full overflow-hidden aspect-[5/6]"
+        >
           {slides.length > 0 ? (
-            slides.map((slide, index) => (
-              <div
-                key={index}
-                className={`absolute inset-0 transition-transform duration-1000 ease-in-out ${
-                  index === currentSlide
-                    ? "translate-x-0"
-                    : index < currentSlide
-                    ? "-translate-x-full"
-                    : "translate-x-full"
-                }`}
-              >
-                {renderSlide(slide, index)}
-              </div>
-            ))
+            <div
+              className="flex transition-transform duration-700 ease-in-out"
+              style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+            >
+              {slides.map((slide, index) => (
+                <div key={index} className="min-w-full h-full">
+                  {renderSlide(slide, index)}
+                </div>
+              ))}
+            </div>
           ) : (
             <p className="text-center">No media available</p>
           )}
 
-          {/* Show navigation dots only if multiple slides exist */}
+          {/* Dots */}
           {slides.length > 1 && (
-            <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
+            <div className="absolute bottom-2 left-1/2 transform bg-transparent -translate-x-1/2 flex space-x-2 z-10">
               {slides.map((_, index) => (
                 <div
                   key={index}
@@ -113,15 +107,13 @@ const ProductCard = ({ product, servings = false }) => {
           <p className="font-Raleway font-bold font-xl">
             Rs: {product?.prod_price}
           </p>
+
           {servings && (
-            <div className="flex gap-2  items-center mobile:gap-2">
+            <div className="flex gap-2 items-center mobile:gap-2">
               <h3 className="text-white/50 text-md mobile:text-base font-ropa">
                 Servings:
               </h3>
               <div className="flex gap-2 bg-mahroon rounded-3xl px-2 py-1 mobile:p-1">
-                {/* {Array.from({ length: product?.prod_serving }, (_, i) => (
-                  <FaUserAlt key={i} className="text-accent text-[10px] " />
-                ))} */}
                 <p className="text-[14px] text-accent font-bold font-ropa">
                   {product?.prod_serving}
                 </p>

@@ -46,7 +46,6 @@ body {
 }
 .bg-mahroon {
   background: var(--mahroon);
-  background-color: #800000; /* Replace with your desired color */
 }
 
 .container {

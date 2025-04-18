@@ -94,9 +94,9 @@ const Page = () => {
                     <p className="flex items-center mb-6">
                       <BsFillClockFill className="text-accent text-xl min-w-8 mobile:w-4" />
                       <h5 className="text-black text-base font-normal font-raleway leading-6 ml-5 mobile:text-sm">
-                        <strong> Mon - Sun: </strong> 05:00 PM to 02:00 AM
-                        {/* <br /> */}
-                        {/* <strong>Fri - Sun:</strong>  05pm - 02AM */}
+                        <strong> Mon - Thu: </strong> 05:00 PM to 02:00 AM
+                        <br />
+                        <strong>Fri - Sun:</strong> 05:00 PM to 03:00 AM
                       </h5>
                     </p>
                     <a
@@ -154,9 +154,9 @@ const Page = () => {
                 required
               />
               <input
-                type="text"
+                type="tel"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={(e) => setPhone(e.target.value.replace(/\D/g, ""))} // Only digits
                 className="w-full py-4 text-white bg-transparent text-lg border border-gray-200 rounded-2xl pl-4 mb-5"
                 placeholder="Phone"
                 required

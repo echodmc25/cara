@@ -75,25 +75,9 @@ const Footer = () => {
                     href={"/career"}
                     className="font-ropa text-base text-white uppercase"
                   >
-                    Career
+                    Careers
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    href={"#"}
-                    className="font-ropa text-base text-white uppercase"
-                  >
-                    Faqs
-                  </Link>
-                </li>
-                {/* <li>
-                  <Link
-                    href={"#"}
-                    className="font-ropa text-base text-white uppercase"
-                  >
-                    Location
-                  </Link>
-                </li> */}
               </ul>
             </div>
             <div>
@@ -122,19 +106,19 @@ const Footer = () => {
                 <div className="flex justify-between items-center font-ropa gap-5 text-base">
                   <span className="w-20">Friday</span>
                   <span>:</span>
-                  <span>05:00 PM to 02:00 AM</span>
+                  <span>05:00 PM to 03:00 AM</span>
                 </div>
 
                 <div className="flex justify-between items-center font-ropa gap-5 text-base">
                   <span className="w-20">Saturday</span>
                   <span>:</span>
-                  <span>05:00 PM to 02:00 AM</span>
+                  <span>05:00 PM to 03:00 AM</span>
                 </div>
 
                 <div className="flex justify-between items-center font-ropa gap-5 text-base">
                   <span className="w-20">Sunday</span>
                   <span>:</span>
-                  <span>05:00 PM to 02:00 AM</span>
+                  <span>05:00 PM to 03:00 AM</span>
                 </div>
               </div>
             </div>
