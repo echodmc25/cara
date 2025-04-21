@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "clients.echodigital.net",
+        hostname: "admin.carabliss.pk",
       },
     ],
   },
@@ -20,7 +20,7 @@ export default nextConfig;
 //     remotePatterns: [
 //       {
 //         protocol: "https",
-//         hostname: "clients.echodigital.net",
+//         hostname: "admin.carabliss.pk",
 //       },
 //     ],
 //   },

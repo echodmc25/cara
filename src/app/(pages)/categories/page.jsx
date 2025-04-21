@@ -4,7 +4,7 @@ import Menu from "@/app/components/menuComponent/Menu";
 const getSubCategoriesWithProducts = async () => {
   try {
     const res = await fetch(
-      `https://clients.echodigital.net/carabliss/get_newProductLatest.php`,
+      `https://admin.carabliss.pk/get_newProductLatest.php`,
       { cache: "no-store" }
     );
 
@@ -19,12 +19,9 @@ const getSubCategoriesWithProducts = async () => {
 
 const getCategories = async () => {
   try {
-    const res = await fetch(
-      "https://clients.echodigital.net/carabliss/get_subcat5.php",
-      {
-        cache: "no-store",
-      }
-    );
+    const res = await fetch("https://admin.carabliss.pk/get_subcat5.php", {
+      cache: "no-store",
+    });
 
     if (!res.ok) {
       throw new Error("Failed to fetch categories");
@@ -39,12 +36,9 @@ const getCategories = async () => {
 
 const getToppings = async () => {
   try {
-    const res = await fetch(
-      "https://clients.echodigital.net/carabliss/get_toppings.php",
-      {
-        cache: "no-store",
-      }
-    );
+    const res = await fetch("https://admin.carabliss.pk/get_toppings.php", {
+      cache: "no-store",
+    });
 
     if (!res.ok) {
       throw new Error("Failed to fetch categories");

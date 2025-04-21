@@ -60,7 +60,7 @@ const Page = () => {
 
     try {
       const response = await axios.post(
-        "https://clients.echodigital.net/carabliss/add_careers.php",
+        "https://admin.carabliss.pk/add_careers.php",
         formDataToSend,
         {
           headers: { "Content-Type": "multipart/form-data" },

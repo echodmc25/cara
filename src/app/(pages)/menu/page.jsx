@@ -4,7 +4,7 @@ import VideoCardsSlider from "@/app/components/slides/VideoCardsSlider";
 const getCategoriesList = async () => {
   try {
     const res = await fetch(
-      "https://clients.echodigital.net/carabliss/get_categoriesnew5.php",
+      "https://admin.carabliss.pk/get_categoriesnew5.php",
       {
         cache: "no-store", // Ensures fresh data on every request
       }
@@ -24,7 +24,7 @@ const getCategoriesList = async () => {
 const getFeaturedVideos = async () => {
   try {
     const res = await fetch(
-      "https://clients.echodigital.net/carabliss/get_featuredvideo.php",
+      "https://admin.carabliss.pk/get_featuredvideo.php",
       {
         cache: "no-store", // Ensures fresh data on every request
       }

@@ -35,7 +35,7 @@ const Page = () => {
 
     try {
       const response = await axios.post(
-        "https://clients.echodigital.net/carabliss/add_contact.php",
+        "https://admin.carabliss.pk/add_contact.php",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

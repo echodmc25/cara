@@ -21,12 +21,9 @@ import VideoCardsSlider from "@/app/components/slides/VideoCardsSlider";
 
 const getCategories = async () => {
   try {
-    const res = await fetch(
-      "https://clients.echodigital.net/carabliss/get_subcat5.php",
-      {
-        cache: "no-store", // Ensures fresh data on every request
-      }
-    );
+    const res = await fetch("https://admin.carabliss.pk/get_subcat5.php", {
+      cache: "no-store", // Ensures fresh data on every request
+    });
 
     if (!res.ok) {
       throw new Error("Failed to fetch categories");
