@@ -4,9 +4,11 @@ import Image from "next/image";
 
 import { useSwipeable } from "react-swipeable";
 
-const DoubleProductCard = ({ product, catTwo, catOne }) => {
+const DoubleProductCard = ({ product, Toppings, catTwo, catOne }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = product?.product_images || [];
+
+  const hasToppings = !!(product?.prod_id && Toppings[product?.prod_id]);
 
   const handlers = useSwipeable({
     onSwipedLeft: () => setCurrentSlide((prev) => (prev + 1) % slides.length),
@@ -84,8 +86,16 @@ const DoubleProductCard = ({ product, catTwo, catOne }) => {
             ))}
           </div>
         )}
-      </div>
 
+        {product?.label && (
+          <div
+            className={`px-4 py-2 text-sm uppercase  z-10 absolute text-white top-0 left-0`}
+            style={{ backgroundColor: product?.labelColor }}
+          >
+            {product?.label}
+          </div>
+        )}
+      </div>
       <div className="w-full min-h-full max-w-1/2 flex flex-col justify-between items-start">
         <div className=" w-full">
           <h3 className="h4 mb-3 text-accent">{product.prod_name}</h3>
@@ -93,49 +103,55 @@ const DoubleProductCard = ({ product, catTwo, catOne }) => {
             {product?.prod_desc}
           </p>
           <div className="flex justify-between items-start gap-5 my-5 mobile:mb-3">
-            <div>
-              <h2 className="h4 text-accent">{catOne}</h2>
-              <p className="my-1 text-white/70 font-ropa text-sm">
-                {product.prod_descMain}
-              </p>
-              <p className="font-Raleway text-lg font-bold">
-                Rs. {product.prod_price}
-              </p>
-              <div className="flex gap-2  items-center justify-start mobile:gap-2 mt-1">
-                <h3 className="text-white/50 text-md mobile:text-base font-ropa">
-                  Servings:
-                </h3>
-                <div className="flex gap-2 bg-mahroon rounded-3xl px-2 py-1 mobile:p-1">
-                  <p className="text-[14px] text-accent font-bold font-ropa">
-                    {product?.prod_serving}
-                  </p>
+            {product.prod_price && (
+              <div>
+                <h2 className="h4 text-accent">{catOne}</h2>
+                <p className="my-1 text-white/70 font-ropa text-sm">
+                  {product.prod_descMain}
+                </p>
+                <p className="font-Raleway text-lg font-bold">
+                  Rs. {product.prod_price}
+                </p>
+                <div className="flex gap-2  items-center justify-start mobile:gap-2 mt-1">
+                  <h3 className="text-white/50 text-md mobile:text-base font-ropa">
+                    Servings:
+                  </h3>
+                  <div className="flex gap-2 bg-mahroon rounded-3xl px-2 py-1 mobile:p-1">
+                    <p className="text-[14px] text-accent font-bold font-ropa">
+                      {product?.prod_serving}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div>
-              <h2 className="h4 text-accent">{catTwo}</h2>
-              <p className="my-1 text-white/70 font-ropa text-sm">
-                {product.prod_descDoubleMain}
-              </p>
-              <p className="font-Raleway text-lg font-bold">
-                Rs. {product.prod_doublePrice}
-              </p>
-              <div className="flex gap-2  items-center justify-start mobile:gap-2 mt-1">
-                <h3 className="text-white/50 text-md mobile:text-base font-ropa">
-                  Servings:
-                </h3>
-                <div className="flex gap-2 bg-mahroon rounded-3xl px-2 py-1 mobile:p-1">
-                  <p className="text-[14px] text-accent font-bold font-ropa">
-                    {product?.prod_servingDouble}
-                  </p>
+            )}
+            {product.prod_doublePrice && (
+              <div>
+                <h2 className="h4 text-accent">{catTwo}</h2>
+                <p className="my-1 text-white/70 font-ropa text-sm">
+                  {product.prod_descDoubleMain}
+                </p>
+                <p className="font-Raleway text-lg font-bold">
+                  Rs. {product.prod_doublePrice}
+                </p>
+                <div className="flex gap-2  items-center justify-start mobile:gap-2 mt-1">
+                  <h3 className="text-white/50 text-md mobile:text-base font-ropa">
+                    Servings:
+                  </h3>
+                  <div className="flex gap-2 bg-mahroon rounded-3xl px-2 py-1 mobile:p-1">
+                    <p className="text-[14px] text-accent font-bold font-ropa">
+                      {product?.prod_servingDouble}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
-        <div className="">
-          <AddOnButton productId={product?.prod_id} />
-        </div>
+        {hasToppings && (
+          <div>
+            <AddOnButton productId={product?.prod_id} />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -40,6 +40,7 @@ export default function Menu({
         <div className="relative">
           <CardsSectionsTesting
             SubCategoriesAndProducts={SubCategoriesAndProducts}
+            Toppings={Toppings}
             setActiveCategory={setActiveCategory}
           />
         </div>

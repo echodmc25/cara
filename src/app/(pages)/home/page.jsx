@@ -44,7 +44,7 @@ export default async function Home() {
   const slides = [
     {
       type: "video",
-      media: "videos/main-banner.mp4",
+      media: "https://admin.carabliss.pk/uploads/mainvideo/main-banner.mp4",
       title: "Experience the Best",
       subtitle: "Delicious Delights",
       description:

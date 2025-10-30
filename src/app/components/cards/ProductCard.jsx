@@ -1,13 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import { useSwipeable } from "react-swipeable";
 import { usePopup } from "@/app/context/PopContext";
 
-const ProductCard = ({ product, servings = false }) => {
+const ProductCard = ({ product, Toppings, servings = false }) => {
   const { setListOpen, setProductId } = usePopup();
+
+  const hasToppings = !!(product?.prod_id && Toppings[product?.prod_id]);
 
   const productToppings = (id) => {
     setProductId(id);
@@ -21,7 +23,7 @@ const ProductCard = ({ product, servings = false }) => {
     onSwipedLeft: () => setCurrentSlide((prev) => (prev + 1) % slides.length),
     onSwipedRight: () =>
       setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1)),
-    trackMouse: true, // enable drag with mouse on desktop
+    trackMouse: true,
   });
 
   const renderSlide = (slide, index) => {
@@ -53,14 +55,15 @@ const ProductCard = ({ product, servings = false }) => {
 
   return (
     <div className="relative group z-0">
-      <button
-        onClick={() => productToppings(product?.prod_id)}
-        className="bg-[#00000090] text-accent px-2 py-1 font-ropa font-medium text-lg flex gap-2 items-center absolute w-fit right-0 top-0 z-10"
-      >
-        <FaPlus className="text-accent text-lg" />
-        Add On
-      </button>
-
+      {hasToppings && (
+        <button
+          onClick={() => productToppings(product?.prod_id)}
+          className="bg-[#00000090] text-accent px-2 py-1 font-ropa font-medium text-lg flex gap-2 items-center absolute w-fit right-0 top-0 z-10"
+        >
+          <FaPlus className="text-accent text-lg" />
+          Add On
+        </button>
+      )}
       <div>
         <div
           {...handlers}
@@ -93,6 +96,14 @@ const ProductCard = ({ product, servings = false }) => {
                   onClick={() => setCurrentSlide(index)}
                 ></div>
               ))}
+            </div>
+          )}
+          {product?.label && (
+            <div
+              className={`px-4 py-2 text-sm uppercase  z-10 absolute text-white top-0 left-0`}
+              style={{ backgroundColor: product?.labelColor }}
+            >
+              {product?.label}
             </div>
           )}
         </div>

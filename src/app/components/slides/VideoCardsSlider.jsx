@@ -219,27 +219,29 @@ const VideoCardsSlider = ({ categorySlides }) => {
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         className="relative"
       >
-        {categorySlides.map((slide) => (
-          <SwiperSlide key={slide.id}>
-            <div className="relative overflow-hidden duration-300 px-[10px] group">
-              <div className="group">
-                <div className="relative w-full overflow-hidden aspect-[5/6] bg-[#ffffff30] backdrop-blur-md">
-                  <video
-                    src={slide.url}
-                    className="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-100 cat-img bg-[#ffffff30] backdrop-blur-md"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                  />
-                </div>
-                <div className="mt-5">
-                  <h3 className="h4 text-accent mb-1 -mt-2">{slide.name}</h3>
+        {categorySlides
+          .sort((a, b) => parseInt(a.position) - parseInt(b.position))
+          .map((slide) => (
+            <SwiperSlide key={slide.id}>
+              <div className="relative overflow-hidden duration-300 px-[10px] group">
+                <div className="group">
+                  <div className="relative w-full overflow-hidden aspect-[5/6] bg-[#ffffff30] backdrop-blur-md">
+                    <video
+                      src={slide.url}
+                      className="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-100 cat-img bg-[#ffffff30] backdrop-blur-md"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                    />
+                  </div>
+                  <div className="mt-5">
+                    <h3 className="h4 text-accent mb-1 -mt-2">{slide.name}</h3>
+                  </div>
                 </div>
               </div>
-            </div>
-          </SwiperSlide>
-        ))}
+            </SwiperSlide>
+          ))}
       </Swiper>
 
       {/* Arrows */}

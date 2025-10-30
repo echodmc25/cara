@@ -71,18 +71,15 @@ const FeaturedProduct = ({ product }) => {
       </div>
 
       {/* Product Image */}
-      <div className="mt-8">
-        {/* {product.product_images?.length > 0 ? (
-          <Image
-            src={product.product_images[0].src}
-            alt={product.prod_name}
-            height={2000}
-            width={2000}
-            className="aspect-video object-cover"
-          />
-        ) : (
-          <p className="text-white/50">No Image Available</p>
-        )} */}
+      <div className="mt-8 relative">
+        {product?.label && (
+          <div
+            className={`px-4 py-2 text-sm uppercase  z-10 absolute text-white top-0 left-0`}
+            style={{ backgroundColor: product?.labelColor }}
+          >
+            {product?.label}
+          </div>
+        )}
 
         <div
           {...handlers}

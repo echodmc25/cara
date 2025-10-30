@@ -11,6 +11,7 @@ import FeaturedProduct from "../cards/FeaturedProduct";
 const CardsSectionsTesting = ({
   SubCategoriesAndProducts,
   setActiveCategory,
+  Toppings,
 }) => {
   const categoryRefs = useRef({});
   const lastCategoryRef = useRef(null);
@@ -77,11 +78,11 @@ const CardsSectionsTesting = ({
           <React.Fragment key={categoryObj?.cat_id}>
             <div key={categoryObj.cat_id}>
               <div
-                className={`flex justify-center items-center overflow-hidden h-40 mobile:h-24 relative mb-6 ${
+                className={`flex justify-center items-center flex-col overflow-hidden min-h-40 mobile:min-h-24 relative mb-6 ${
                   catIndex <= 1 ? "mt-10" : "mt-20"
                 } mobile:mt-10`}
               >
-                <div className="absolute left-0 top-0 w-full h-40 mobile:h-24 z-0 bg-background">
+                <div className="absolute left-0 top-0 w-full h-full z-0 bg-background">
                   <Image
                     src={categoryObj.cat_image}
                     alt={categoryObj.cat_name}
@@ -93,6 +94,11 @@ const CardsSectionsTesting = ({
                 <h1 className="font-bodoni text-[48px] mobile:text-[28px] text-center text-accent text-primary relative z-10">
                   {categoryObj.cat_name}
                 </h1>
+                {categoryObj?.extra_things && (
+                  <h3 className="text-right text-[24px] mobile:text-[20px] mobile:text-center text-mahroon relative w-full px-3">
+                    {categoryObj?.extra_things}
+                  </h3>
+                )}
               </div>
 
               {categoryObj.sub_categories?.length > 0 &&
@@ -127,6 +133,7 @@ const CardsSectionsTesting = ({
                                     product={product}
                                     key={product?.prod_id}
                                     servings={true}
+                                    Toppings={Toppings}
                                   />
                                 ))}
                               </div>
@@ -140,6 +147,7 @@ const CardsSectionsTesting = ({
                                   servings={true}
                                   catOne={subCategory?.sub_singlename}
                                   catTwo={subCategory?.sub_doublename}
+                                  Toppings={Toppings}
                                 />
                               ))}
 
